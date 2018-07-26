@@ -1,0 +1,150 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Jan",
+      "days_per_week": 3,
+      "diff_days": {
+        "31": 1,
+        "32": 2,
+        "33": 3
+      }
+    },
+    {
+      "id": 2,
+      "name": "Jonas",
+      "days_per_week": 4,
+      "diff_days": {
+        "35": 6,
+        "33": 0,
+        "32": 1
+      }
+    },
+    {
+      "id": 3,
+      "name": "Alex",
+      "days_per_week": 4,
+      "diff_days": {
+        "33": 0,
+        "32": 1,
+        "35": 6
+      }
+    },
+    {
+      "id": 4,
+      "name": "Chris",
+      "days_per_week": 4,
+      "diff_days": {
+        "32": 1,
+        "33": 0,
+        "35": 6
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Staffed project",
+      "description": "[STAFFING VORLAGE]",
+      "estimation_days": 4,
+      "start_week": 5,
+      "end_week": 7,
+      "closed": false,
+      "staffings": [
+        {
+          "user_id": 1,
+          "days": 1,
+          "week": 32
+        },
+        {
+          "user_id": 2,
+          "days": 2,
+          "week": 33
+        },
+        {
+          "user_id": 2,
+          "days": 1,
+          "week": 34
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Closed project",
+      "description": "[STAFFING VORLAGE]",
+      "estimation_days": 4,
+      "start_week": 5,
+      "end_week": 7,
+      "closed": true,
+      "staffings": [
+        {
+          "user_id": 1,
+          "days": 1,
+          "week": 5
+        },
+        {
+          "user_id": 2,
+          "days": 2,
+          "week": 6
+        },
+        {
+          "user_id": 2,
+          "days": 1,
+          "week": 7
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Not staffed project",
+      "description": "Lorem ipsum dolor...",
+      "estimation_days": 4,
+      "start_week": 5,
+      "end_week": 7,
+      "closed": false,
+      "staffings": [
+        {
+          "user_id": 3,
+          "days": 1.25,
+          "week": 31
+        },
+        {
+          "user_id": 3,
+          "days": 1.25,
+          "week": 32
+        },
+        {
+          "user_id": 3,
+          "days": 1.25,
+          "week": 32
+        },
+        {
+          "user_id": 1,
+          "days": 3,
+          "week": 33
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Half staffed project",
+      "description": "[STAFFING VORLAGE]",
+      "estimation_days": 4,
+      "start_week": 5,
+      "end_week": 7,
+      "closed": false,
+      "staffings": [
+        {
+          "user_id": 1,
+          "days": 1,
+          "week": 35
+        },
+        {
+          "user_id": 2,
+          "days": 1,
+          "week": 37
+        }
+      ]
+    }
+  ]
+}

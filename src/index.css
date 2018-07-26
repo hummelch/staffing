@@ -1,0 +1,7 @@
+.grid-x + .grid-x {
+  margin-top: 2em;
+}
+
+.content {
+  margin-top: 60px;
+}

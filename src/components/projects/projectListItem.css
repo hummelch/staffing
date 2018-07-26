@@ -1,0 +1,20 @@
+.projectListItem {
+  margin-top: 20px;
+}
+
+.projectListItem:first-child {
+  margin-top: 0;
+}
+
+.projectListItem__name {
+  font-weight: bold;
+}
+
+.projectListItem__closeButton {
+  outline: none;
+}
+
+.projectListItem__staffButton {
+  margin: 0 1em 0 0;
+  padding: 0.5em 1em;
+}

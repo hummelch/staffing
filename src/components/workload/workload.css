@@ -1,0 +1,32 @@
+.workload {
+  margin-top: 10px;
+}
+
+.workload__cell {
+  padding: 0;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+}
+
+.workload__cell--ok {
+  background-color: #3adb76;
+}
+
+.workload__cell--warning {
+  background-color: #ffae00;
+}
+
+.workload__cell--full {
+  background-color: #cc4b37;
+}
+
+.workload__cell--alert {
+  background-color: #cc4b37;
+  color: #fff;
+  font-weight: bold;
+}
+
+.workload__cell--name {
+  text-align: left;
+}
