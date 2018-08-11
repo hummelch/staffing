@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 
-import WorkloadRow from './WorkloadRow';
-import './workload.css';
+import WorkloadTable from './WorkloadTable';
 
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -102,16 +101,7 @@ class Workload extends Component {
           handleStyle={[Workload.handleStyle, Workload.handleStyle]}
           trackStyle={[Workload.trackStyle, Workload.trackStyle]}
         />
-        <table className="workload">
-          <thead>
-          <tr>{thead}</tr>
-          </thead>
-          <tbody>
-          {this.props.users.map((user) => (
-            <WorkloadRow key={user.id} user={user} from={this.state.from} to={this.state.to}/>
-          ))}
-          </tbody>
-        </table>
+        <WorkloadTable from={this.state.from} to={this.state.to} users={this.props.users} />
       </div>
     );
   }
