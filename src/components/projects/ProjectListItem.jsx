@@ -49,7 +49,6 @@ class ProjectListItem extends Component {
   render() {
     const {project} = this.props;
     const {isClosing, isDetailVisible, tabIndex} = this.state;
-    let staffing = '';
 
     if (isClosing) {
       return (
@@ -99,19 +98,23 @@ class ProjectListItem extends Component {
           <button className="projectListItem__toggleDetailButton" onClick={this.toggleDetail} type="button">
             {isDetailVisible ? '-' : '+'}
           </button>
-          <a className="projectListItem__staffButton button small small-only-expanded success"
-             onClick={this.toggleStaffProject}>Staff</a>
+          { staffedDays > project.estimation_days ? '' : (
+            <a className="projectListItem__staffButton button small small-only-expanded success"
+               onClick={this.toggleStaffProject}>Staff
+            </a>
+          ) }
           <span className="projectListItem__name">{project.name}</span>
         </div>
-
-        {staffing}
 
         <div class={`projectListItem__${isDetailVisible ? 'detailVisible' : 'detailHidden'}`}>
           <Tabs selectedIndex={tabIndex} onSelect={tabIndex => this.setState({tabIndex})}>
             <TabList>
               <Tab>Timing</Tab>
               <Tab>Task</Tab>
-              <Tab>Staffing</Tab>
+              <Tab>
+                Staffing ({staffedDays} of {project.estimation_days} TW)
+                {staffedDays > project.estimation_days ? ' ❗' : ''}
+              </Tab>
             </TabList>
 
             <TabPanel>
