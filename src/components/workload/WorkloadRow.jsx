@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class WorkloadRow extends Component {
+
   getClassNameByWorkload(daysLeft) {
     if (daysLeft < 0) {
       return 'workload__cell--alert';
