@@ -94,10 +94,8 @@ class StaffingForm extends Component {
     const {user, tw, kwFrom, kwTo, isFormReady} = this.state;
     const {project, users} = this.props;
 
-    const userOptions = [<option value="0" key="0">Select Dev</option>];
-    for (let user of this.props.users) {
-      userOptions.push(<option value={user.id} key={user.id}>{user.name}</option>);
-    }
+    const userOptions = this.props.users.map(user => <option value={user.id} key={user.id}>{user.name}</option>);
+    const userOptionMarkup = [<option value="0" key="0">Select Dev</option>, ...userOptions];
 
     const kwFromOptions = [<option value="0" key="0">KW Start</option>];
     for (let from = project.start_week; from <= project.end_week; from++) {
@@ -123,7 +121,7 @@ class StaffingForm extends Component {
           <div className="grid-x grid-padding-x">
             <div className="medium-4 large-7 cell">
               <select value={user} onChange={this.handleChangeUser}>
-                {userOptions}
+                {userOptionMarkup}
               </select>
             </div>
             <div className="medium-2 large-5 cell">
