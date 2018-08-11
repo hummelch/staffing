@@ -18,3 +18,30 @@
   margin: 0 1em 0 0;
   padding: 0.5em 1em;
 }
+
+.projectListItem__detailHidden {
+  display: none;
+}
+
+.projectListItem__detailVisible {
+  display: block;
+}
+
+.projectListItem__title {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.projectListItem__toggleDetailButton {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: bold;
+  margin: 0 0.5rem 0 0;
+  padding: 0 0.5rem 0.25rem 0;
+  vertical-align: bottom;
+  outline: none;
+  cursor: pointer;
+}

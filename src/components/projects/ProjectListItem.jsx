@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import store from '../../store';
-import { closeProject } from '../../store/thunks';
+import {closeProject} from '../../store/thunks';
 import PropTypes from 'prop-types';
 
 import StaffingForm from '../staffing/StaffingForm';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import './react-tabs.css';
 
 class ProjectListItem extends Component {
@@ -13,9 +13,11 @@ class ProjectListItem extends Component {
 
     this.handleCloseProject = this.handleCloseProject.bind(this);
     this.toggleStaffProject = this.toggleStaffProject.bind(this);
+    this.toggleDetail = this.toggleDetail.bind(this);
 
     this.state = {
       isClosing: false,
+      isDetailVisible: false,
       tabIndex: 0
     };
   }
@@ -24,19 +26,29 @@ class ProjectListItem extends Component {
     e.preventDefault();
 
     if (window.confirm(`Really close project "${this.props.project.name}"?`)) {
-      this.setState({ isClosing: true });
+      this.setState({isClosing: true});
       store.dispatch(closeProject(this.props.project.id));
     }
   }
 
   toggleStaffProject(e) {
     e.preventDefault();
-    this.setState({ tabIndex: 2 });
+    this.setState({
+      isDetailVisible: true,
+      tabIndex: 2
+    });
+  }
+
+  toggleDetail(e) {
+    e.preventDefault();
+    this.setState({
+      isDetailVisible: !this.state.isDetailVisible
+    });
   }
 
   render() {
-    const { project } = this.props;
-    const { isClosing, tabIndex } = this.state;
+    const {project} = this.props;
+    const {isClosing, isDetailVisible, tabIndex} = this.state;
     let staffing = '';
 
     if (isClosing) {
@@ -60,7 +72,7 @@ class ProjectListItem extends Component {
     );
 
     let staffingPanel = '';
-    if(project.staffings.length) {
+    if (project.staffings.length) {
       const state = store.getState();
       const findNameByUserid = (id) => {
         const user = state.data.users.find(user => user.id === id);
@@ -84,30 +96,36 @@ class ProjectListItem extends Component {
         </button>
 
         <div className="projectListItem__title">
-          <a className="projectListItem__staffButton button small small-only-expanded success" onClick={this.toggleStaffProject}>Staff</a>
+          <button className="projectListItem__toggleDetailButton" onClick={this.toggleDetail} type="button">
+            {isDetailVisible ? '-' : '+'}
+          </button>
+          <a className="projectListItem__staffButton button small small-only-expanded success"
+             onClick={this.toggleStaffProject}>Staff</a>
           <span className="projectListItem__name">{project.name}</span>
         </div>
 
         {staffing}
 
-        <Tabs selectedIndex={tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
-          <TabList>
-            <Tab>Timing</Tab>
-            <Tab>Task</Tab>
-            <Tab>Staffing</Tab>
-          </TabList>
+        <div class={`projectListItem__${isDetailVisible ? 'detailVisible' : 'detailHidden'}`}>
+          <Tabs selectedIndex={tabIndex} onSelect={tabIndex => this.setState({tabIndex})}>
+            <TabList>
+              <Tab>Timing</Tab>
+              <Tab>Task</Tab>
+              <Tab>Staffing</Tab>
+            </TabList>
 
-          <TabPanel>
-            {timingPanel}
-          </TabPanel>
-          <TabPanel>
-            <p>{project.description}</p>
-          </TabPanel>
-          <TabPanel>
-            <StaffingForm project={project} />
-            {staffingPanel}
-          </TabPanel>
-        </Tabs>
+            <TabPanel>
+              {timingPanel}
+            </TabPanel>
+            <TabPanel>
+              <p>{project.description}</p>
+            </TabPanel>
+            <TabPanel>
+              <StaffingForm project={project}/>
+              {staffingPanel}
+            </TabPanel>
+          </Tabs>
+        </div>
       </div>
     );
   }
