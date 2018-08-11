@@ -2,10 +2,14 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import store from '../../store';
 import {addStaffings} from '../../store/thunks';
+import WorkloadTable from "../workload/WorkloadTable";
+import PropTypes from "prop-types";
+import {calculateWorkloadForUser} from "../../staffing/prepareUserData";
 
 const mapStateToProps = state => {
-  const users = [...state.data.users];
-  users.sort((a, b) => {
+  const users = state.data.users.map(stateUser => {
+    return calculateWorkloadForUser(stateUser, state.data.projects);
+  }).sort((a, b) => {
     if (a.name < b.name) {
       return -1;
     }
@@ -29,10 +33,10 @@ class StaffingForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.defaultState = {
-      user: '',
-      tw: '',
-      kwFrom: '',
-      kwTo: '',
+      user: undefined,
+      tw: undefined,
+      kwFrom: undefined,
+      kwTo: undefined,
       isFormReady: false
     };
 
@@ -88,7 +92,7 @@ class StaffingForm extends Component {
 
   render() {
     const {user, tw, kwFrom, kwTo, isFormReady} = this.state;
-    const {project} = this.props;
+    const {project, users} = this.props;
 
     const userOptions = [<option value="0" key="0">Select Dev</option>];
     for (let user of this.props.users) {
@@ -107,37 +111,51 @@ class StaffingForm extends Component {
       }
     }
 
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="hidden" name="project_id" value={this.props.project.id}/>
+    const conditionalWorkloadTable = user ? (
+      <WorkloadTable from={project.start_week} to={project.end_week} users={users.filter(u => user === u.id)}/>
+    ) : '';
 
-        <div className="grid-x grid-padding-x">
-          <div className="medium-4 large-7 cell">
-            <select value={user} onChange={this.handleChangeUser}>
-              {userOptions}
-            </select>
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="hidden" name="project_id" value={this.props.project.id}/>
+
+          <div className="grid-x grid-padding-x">
+            <div className="medium-4 large-7 cell">
+              <select value={user} onChange={this.handleChangeUser}>
+                {userOptions}
+              </select>
+            </div>
+            <div className="medium-2 large-5 cell">
+              <input value={tw} onChange={this.handleChangeTw} placeholder="TW per Week" type="number" min="0.25"
+                     max="7"
+                     step="0.25"/>
+            </div>
+            <div className="medium-2 large-4 cell">
+              <select value={kwFrom} onChange={this.handleChangeKwFrom}>
+                {kwFromOptions}
+              </select>
+            </div>
+            <div className="medium-2 large-4 cell">
+              <select value={kwTo} onChange={this.handleChangeKwTo} disabled={!kwFrom}>
+                {kwToOptions}
+              </select>
+            </div>
+            <div className="medium-2 large-4 cell">
+              <input disabled={!isFormReady} type="submit" className="button" value="Add"/>
+            </div>
           </div>
-          <div className="medium-2 large-5 cell">
-            <input value={tw} onChange={this.handleChangeTw} placeholder="TW per Week" type="number" min="0.25" max="7"
-                   step="0.25"/>
-          </div>
-          <div className="medium-2 large-4 cell">
-            <select value={kwFrom} onChange={this.handleChangeKwFrom}>
-              {kwFromOptions}
-            </select>
-          </div>
-          <div className="medium-2 large-4 cell">
-            <select value={kwTo} onChange={this.handleChangeKwTo} disabled={!kwFrom}>
-              {kwToOptions}
-            </select>
-          </div>
-          <div className="medium-2 large-4 cell">
-            <input disabled={!isFormReady} type="submit" className="button" value="Add"/>
-          </div>
-        </div>
-      </form>
+        </form>
+
+        {conditionalWorkloadTable}
+      </div>
     )
   }
 }
+
+StaffingForm.propTypes = {
+  project: PropTypes.object,
+  users: PropTypes.array
+};
 
 export default connect(mapStateToProps)(StaffingForm);
