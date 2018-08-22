@@ -67,7 +67,7 @@ class ProjectListItem extends Component {
     }
 
     addToList('Timing', timing);
-    addToList('Staffing', `${project.estimation_days} TW (${staffedDays} TW staffed)`);
+    addToList('Staffing', `${project.estimation_days} TW (${staffedDays} TW staffed) ${staffedDays > project.estimation_days ? '❗' : ''}`);
     addToList('Project number', `${project.number}`, project.number);
     addToList('Project Manager', `${project.manager}`, project.manager);
     addToList('Favored Developer', `${project.favored_developer}`, project.favored_developer);
