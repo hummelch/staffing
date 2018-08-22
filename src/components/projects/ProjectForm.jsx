@@ -39,13 +39,13 @@ class ProjectForm extends Component {
             </div>
 
             <div className="medium-6 cell">
-              <label>Project name
+              <label>Project Name
                 <input type="text" placeholder="Project name" />
               </label>
             </div>
 
             <div className="medium-3 cell">
-              <label>Project number
+              <label>Project Number
                 <input type="text" placeholder="Teambox project number" />
               </label>
             </div>
