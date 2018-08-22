@@ -44,8 +44,13 @@
   "projects": [
     {
       "id": 1,
+      "customer": "Customer Name",
       "name": "Staffed project",
-      "description": "[STAFFING VORLAGE]",
+      "number": "123.1234567",
+      "status": "ordered",
+      "manager": "Mr. X",
+      "favored_developer": "Mr. Z",
+      "description": "Some additional description",
       "estimation_days": 4,
       "start_week": 5,
       "end_week": 7,
@@ -70,8 +75,13 @@
     },
     {
       "id": 2,
+      "customer": "Customer Name 2",
       "name": "Closed project",
-      "description": "[STAFFING VORLAGE]",
+      "number": "123.1234567",
+      "status": "ordered",
+      "manager": "Mr. X",
+      "favored_developer": "Mr. Z",
+      "description": "Some additional description",
       "estimation_days": 4,
       "start_week": 5,
       "end_week": 7,
@@ -96,42 +106,31 @@
     },
     {
       "id": 3,
+      "customer": "Customer",
       "name": "Not staffed project",
-      "description": "Lorem ipsum dolor...",
+      "number": "123.1234567",
+      "status": "ordered",
+      "manager": "Mr. X",
+      "favored_developer": "Mr. Z",
+      "description": "Some additional description",
       "estimation_days": 4,
-      "start_week": 5,
-      "end_week": 7,
+      "start_week": 31,
+      "end_week": 37,
       "closed": false,
-      "staffings": [
-        {
-          "user_id": 3,
-          "days": 1.25,
-          "week": 31
-        },
-        {
-          "user_id": 3,
-          "days": 1.25,
-          "week": 32
-        },
-        {
-          "user_id": 3,
-          "days": 1.25,
-          "week": 32
-        },
-        {
-          "user_id": 1,
-          "days": 3,
-          "week": 33
-        }
-      ]
+      "staffings": []
     },
     {
       "id": 4,
+      "customer": "Customer Name",
       "name": "Half staffed project",
-      "description": "[STAFFING VORLAGE]",
+      "number": "123.1234567",
+      "status": "ordered",
+      "manager": "Mr. X",
+      "favored_developer": "Mr. Z",
+      "description": "Some additional description",
       "estimation_days": 4,
-      "start_week": 5,
-      "end_week": 7,
+      "start_week": 31,
+      "end_week": 37,
       "closed": false,
       "staffings": [
         {
@@ -142,6 +141,32 @@
         {
           "user_id": 2,
           "days": 1,
+          "week": 37
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "customer": "Customer",
+      "name": "Overstaffed project",
+      "number": "123.1234567",
+      "status": "ordered",
+      "manager": "Mr. X",
+      "favored_developer": "Mr. Z",
+      "description": "Some additional description",
+      "estimation_days": 4,
+      "start_week": 31,
+      "end_week": 37,
+      "closed": false,
+      "staffings": [
+        {
+          "user_id": 1,
+          "days": 3,
+          "week": 35
+        },
+        {
+          "user_id": 2,
+          "days": 3,
           "week": 37
         }
       ]
