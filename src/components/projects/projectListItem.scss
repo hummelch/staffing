@@ -1,0 +1,48 @@
+.projectListItem {
+  margin-top: 20px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &__name {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  &__closeButton {
+    outline: none;
+  }
+
+  &__staffButton {
+    margin: 0 1em 0 0;
+    padding: 0.5em 1em;
+  }
+
+  &__detailHidden {
+    display: none;
+  }
+
+  &__detailVisible {
+    display: block;
+  }
+
+  &__title {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  &__toggleDetailButton {
+    position: absolute;
+    top: -8px;
+    left: 0;
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: bold;
+    margin: 0 0.5rem 0 0;
+    padding: 0 0.5rem 0.25rem 0;
+    vertical-align: bottom;
+    outline: none;
+    cursor: pointer;
+  }
+}

@@ -11,8 +11,13 @@
   border-bottom: 1px solid #1779ba;
   background-color: #fff;
   padding: 0.65rem 0;
-  z-index: 1; }
-  .navigation > li {
-    padding-left: 1.5rem; }
-    .navigation > li:first-child {
-      padding-left: 0; }
+  z-index: 1;
+
+  & > li {
+    padding-left: 1.5rem;
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+}

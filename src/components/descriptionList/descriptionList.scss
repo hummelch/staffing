@@ -1,0 +1,12 @@
+.descriptionList {
+  color:lime;
+
+  &__title {
+    margin-top: 1rem;
+    font-weight: bold;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
