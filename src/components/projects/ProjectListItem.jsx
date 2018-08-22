@@ -1,18 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import store from '../../store';
-import {closeProject} from '../../store/thunks';
+import { closeProject } from '../../store/thunks';
 import PropTypes from 'prop-types';
 
+import DescriptionList from '../descriptionList/DescriptionList';
 import StaffingForm from '../staffing/StaffingForm';
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './react-tabs.css';
+import { getProjectStatusTranslation } from '../../staffing/projectStatus';
 
 class ProjectListItem extends Component {
   constructor(props) {
     super(props);
 
     this.handleCloseProject = this.handleCloseProject.bind(this);
-    this.toggleStaffProject = this.toggleStaffProject.bind(this);
+    this.openDetailsAndShowStaffingTab = this.openDetailsAndShowStaffingTab.bind(this);
     this.toggleDetail = this.toggleDetail.bind(this);
 
     this.state = {
@@ -26,12 +28,12 @@ class ProjectListItem extends Component {
     e.preventDefault();
 
     if (window.confirm(`Really close project "${this.props.project.name}"?`)) {
-      this.setState({isClosing: true});
+      this.setState({ isClosing: true });
       store.dispatch(closeProject(this.props.project.id));
     }
   }
 
-  toggleStaffProject(e) {
+  openDetailsAndShowStaffingTab(e) {
     e.preventDefault();
     this.setState({
       isDetailVisible: true,
@@ -46,29 +48,48 @@ class ProjectListItem extends Component {
     });
   }
 
+  getStaffedDays(project) {
+    return project.staffings.reduce((acc, val) => acc + val.days, 0)
+  }
+
+  createProjectDescriptionList(project) {
+    const descriptions = [];
+    const addToList = (title, description, condition=true) => {
+      if(condition) {
+        descriptions.push({title, description});
+      }
+    };
+
+    const staffedDays = this.getStaffedDays(project);
+    let timing = `KW ${project.start_week}`;
+    if(project.start_week !== project.end_week) {
+      timing += ` - ${project.end_week}`;
+    }
+
+    addToList('Timing', timing);
+    addToList('Staffing', `${project.estimation_days} TW (${staffedDays} TW staffed)`);
+    addToList('Project number', `${project.number}`, project.number);
+    addToList('Project Manager', `${project.manager}`, project.manager);
+    addToList('Favored Developer', `${project.favored_developer}`, project.favored_developer);
+    addToList('Status', getProjectStatusTranslation(project.status));
+
+    return descriptions;
+  }
+
   render() {
-    const {project} = this.props;
-    const {isClosing, isDetailVisible, tabIndex} = this.state;
+    const { project } = this.props;
+    const { isClosing, isDetailVisible, tabIndex } = this.state;
 
     if (isClosing) {
       return (
-        <div className="projectListItem">
+        <div className="projectListItem callout">
           <div>Project is closing...</div>
         </div>
       );
     }
 
-    const staffedDays = project.staffings.reduce((acc, val) => acc + val.days, 0);
-    const timingPanel = (
-      <div>
-        <div>
-          KW {project.start_week}{project.start_week !== project.end_week && ` - ${project.end_week}`}
-        </div>
-        <div>
-          {project.estimation_days} TW ({staffedDays} TW staffed)
-        </div>
-      </div>
-    );
+    const descriptions = this.createProjectDescriptionList(project);
+    const staffedDays = this.getStaffedDays(project);
 
     let staffingPanel = '';
     if (project.staffings.length) {
@@ -98,33 +119,35 @@ class ProjectListItem extends Component {
           <button className="projectListItem__toggleDetailButton" onClick={this.toggleDetail} type="button">
             {isDetailVisible ? '-' : '+'}
           </button>
-          { staffedDays > project.estimation_days ? '' : (
+          {staffedDays >= project.estimation_days ? '' : (
             <a className="projectListItem__staffButton button small small-only-expanded success"
-               onClick={this.toggleStaffProject}>Staff
+              onClick={this.openDetailsAndShowStaffingTab}>Staff
             </a>
-          ) }
-          <span className="projectListItem__name">{project.name}</span>
+          )}
+          <span className="projectListItem__name" onClick={this.toggleDetail}>
+            {staffedDays > project.estimation_days ? '❗' : ''}
+            {project.customer} - {project.name}
+          </span>
         </div>
 
-        <div class={`projectListItem__${isDetailVisible ? 'detailVisible' : 'detailHidden'}`}>
-          <Tabs selectedIndex={tabIndex} onSelect={tabIndex => this.setState({tabIndex})}>
+        <div className={`projectListItem__${isDetailVisible ? 'detailVisible' : 'detailHidden'}`}>
+          <Tabs selectedIndex={tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
             <TabList>
-              <Tab>Timing</Tab>
-              <Tab>Task</Tab>
+              <Tab>Facts</Tab>
+              <Tab>Details</Tab>
               <Tab>
                 Staffing ({staffedDays} of {project.estimation_days} TW)
-                {staffedDays > project.estimation_days ? ' ❗' : ''}
               </Tab>
             </TabList>
 
             <TabPanel>
-              {timingPanel}
+              <DescriptionList items={descriptions} />
             </TabPanel>
             <TabPanel>
               <p>{project.description}</p>
             </TabPanel>
             <TabPanel>
-              <StaffingForm project={project}/>
+              <StaffingForm project={project} />
               {staffingPanel}
             </TabPanel>
           </Tabs>
