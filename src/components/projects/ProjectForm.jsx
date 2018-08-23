@@ -201,7 +201,7 @@ class ProjectForm extends Component {
               />
           </div>
 
-          <p class="help-text">* Required fields</p>
+          <p className="help-text">* Required fields</p>
         </div>
       </form>
     );
