@@ -33,11 +33,13 @@ class ProjectForm extends Component {
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value }, () => {
-      if(this.state.end_week < this.state.start_week) {
-        this.setState({ end_week: null })
-      }
-    });
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  componentDidUpdate() {
+    if(this.state.end_week && this.state.end_week < this.state.start_week) {
+      this.setState({ end_week: null })
+    }
   }
 
   render() {
