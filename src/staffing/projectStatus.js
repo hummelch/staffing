@@ -15,7 +15,7 @@ const addTranslation = (language, key, value) => {
 
 addTranslation('en', PROJECT_STATUS.ORDERED, 'Ordered');
 addTranslation('en', PROJECT_STATUS.HOLD, 'On Hold');
-addTranslation('en', PROJECT_STATUS.BLOCKER, 'Blocker');
+addTranslation('en', PROJECT_STATUS.BLOCKER, 'Blocker (Not ordered yet)');
 
 export const getProjectStatusTranslation = (key, language = 'en') => {
   if(!i18n[language] || !i18n[language][key]) {
