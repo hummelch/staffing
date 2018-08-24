@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { getWeekNumber } from '../../staffing/dateHelper';
 import { PROJECT_STATUS, getProjectStatusTranslation } from '../../staffing/projectStatus';
-
+import { addProject } from '../../store/thunks';
+import store from '../../store';
 
 const defaultState = {
   customer: '',
   name: '',
   number: '',
-  status: '',
+  status: PROJECT_STATUS.ORDERED,
   manager: '',
   developer: '',
   description: '',
@@ -30,10 +31,26 @@ class ProjectForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    store.dispatch(addProject(this.state));
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    const inputName = event.target.name;
+    let value = event.target.value;
+
+    switch(event.target.getAttribute('data-parse')) {
+      case 'integer':
+        value = parseInt(value, 10);
+        break;
+
+      case 'float':
+        value = parseFloat(value);
+        break;
+
+      default:
+    }
+
+    this.setState({ [inputName]: value });
   }
 
   componentDidUpdate() {
@@ -160,6 +177,7 @@ class ProjectForm extends Component {
                   type="number"
                   step="0.25"
                   placeholder="Days"
+                  data-parse="float"
                   required
                   />
               </label>
@@ -171,6 +189,7 @@ class ProjectForm extends Component {
                   name="start_week"
                   onChange={this.handleChange}
                   defaultValue={this.state.start_week}
+                  data-parse="integer"
                   required
                   >
                   {startingWeekOptions}
@@ -185,6 +204,7 @@ class ProjectForm extends Component {
                   onChange={this.handleChange}
                   defaultValue={this.state.end_week}
                   disabled={!this.state.start_week}
+                  data-parse="integer"
                   required
                   >
                   {endingWeekOptions}
