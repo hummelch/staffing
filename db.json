@@ -15,9 +15,9 @@
       "name": "Jonas",
       "days_per_week": 4,
       "diff_days": {
-        "35": 6,
+        "32": 1,
         "33": 0,
-        "32": 1
+        "35": 6
       }
     },
     {
@@ -25,8 +25,8 @@
       "name": "Alex",
       "days_per_week": 4,
       "diff_days": {
-        "33": 0,
         "32": 1,
+        "33": 0,
         "35": 6
       }
     },
@@ -170,6 +170,36 @@
           "week": 37
         }
       ]
+    },
+    {
+      "customer": "foo",
+      "name": "bar",
+      "number": "",
+      "status": "ordered",
+      "manager": "",
+      "developer": "",
+      "description": "",
+      "estimation_days": 23,
+      "start_week": 34,
+      "end_week": 36,
+      "closed": false,
+      "staffings": [],
+      "id": 6
+    },
+    {
+      "customer": "fuzi",
+      "name": "buzi",
+      "number": "",
+      "status": "ordered",
+      "manager": "",
+      "developer": "",
+      "description": "<script>alert('xss')</script>",
+      "estimation_days": 12,
+      "start_week": 34,
+      "end_week": 34,
+      "closed": false,
+      "staffings": [],
+      "id": 7
     }
   ]
 }
