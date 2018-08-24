@@ -54,18 +54,6 @@ const rootReducer = (state = initialState, action) => {
       return newState;
 
     case ADD_PROJECT_SUCCESS:
-
-      console.log('reduce to', {
-        ...state,
-        data: {
-          ...state.data,
-          projects: [
-            ...state.data.projects,
-            action.payload.project
-          ]
-        }
-      });
-
       return {
         ...state,
         data: {
