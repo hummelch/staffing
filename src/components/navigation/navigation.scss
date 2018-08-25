@@ -20,4 +20,10 @@
       padding-left: 0;
     }
   }
+
+  &__link {
+    &--active {
+      text-decoration: underline;
+    }
+  }
 }
