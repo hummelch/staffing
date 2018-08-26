@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import store from '../../store';
 import { closeProject } from '../../store/thunks';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import DescriptionList from '../descriptionList/DescriptionList';
 import StaffingForm from '../staffing/StaffingForm';
@@ -54,15 +55,15 @@ class ProjectListItem extends Component {
 
   createProjectDescriptionList(project) {
     const descriptions = [];
-    const addToList = (title, description, condition=true) => {
-      if(condition) {
-        descriptions.push({title, description});
+    const addToList = (title, description, condition = true) => {
+      if (condition) {
+        descriptions.push({ title, description });
       }
     };
 
     const staffedDays = this.getStaffedDays(project);
     let timing = `KW ${project.start_week}`;
-    if(project.start_week !== project.end_week) {
+    if (project.start_week !== project.end_week) {
       timing += ` - ${project.end_week}`;
     }
 
@@ -128,6 +129,8 @@ class ProjectListItem extends Component {
             {staffedDays > project.estimation_days ? '❗' : ''}
             {project.customer} - {project.name}
           </span>
+
+          <Link to={{ pathname: '/new-project', state: { project } }}> <span role="img" aria-label="edit project">✏️</span></Link>
         </div>
 
         <div className={`projectListItem__${isDetailVisible ? 'detailVisible' : 'detailHidden'}`}>
