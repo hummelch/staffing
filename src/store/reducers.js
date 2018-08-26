@@ -2,7 +2,8 @@ import {
   LOAD_DB, LOAD_DB_ERROR, LOAD_DB_SUCCESS, LOAD_DB_BEGIN,
   CLOSE_PROJECT_SUCCESS,
   ADD_STAFFING_SUCCESS,
-  ADD_PROJECT_SUCCESS
+  ADD_PROJECT_SUCCESS,
+  UPDATE_PROJECT_SUCCESS
 } from './types';
 
 const initialState = {
@@ -64,6 +65,15 @@ const rootReducer = (state = initialState, action) => {
           ]
         }
       };
+
+    case UPDATE_PROJECT_SUCCESS:
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        projects: state.data.projects.map(project => (project.id === action.payload.project.id) ? action.payload.project : project)
+      }
+    };
 
     default:
       return state;

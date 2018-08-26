@@ -1,4 +1,4 @@
-import { loadDbBegin, loadDbSuccess, loadDbError, closeProjectSuccess, addStaffingSuccess, addProjectSuccess } from './actions';
+import { loadDbBegin, loadDbSuccess, loadDbError, closeProjectSuccess, addStaffingSuccess, addProjectSuccess, updateProjectSuccess } from './actions';
 import axios from 'axios';
 import store from './index';
 
@@ -71,11 +71,6 @@ export function addProject(project) {
   return dispatch => {
     // dispatch(loadDbBegin());
 
-    // const state = store.getState();
-    // const { projects } = state.data;
-    // const project = Object.assign({}, projects.find((item) => item.id === projectId));
-    // project.staffings.push(...staffings);
-
     return axios({
       method: 'POST',
       url: `http://localhost:5000/projects`,
@@ -84,6 +79,26 @@ export function addProject(project) {
     })
       .then((response) => {
         dispatch(addProjectSuccess(response.data));
+      })
+      .catch((error) => {
+        console.log('error adding project', error);
+        // dispatch(loadDbError(error))
+      });
+  };
+}
+
+export function updateProject(project) {
+  return dispatch => {
+    // dispatch(loadDbBegin());
+
+    return axios({
+      method: 'PUT',
+      url: `http://localhost:5000/projects/${project.id}`,
+      headers: { 'Content-Type': 'application/json' },
+      data: project
+    })
+      .then((response) => {
+        dispatch(updateProjectSuccess(response.data));
       })
       .catch((error) => {
         console.log('error adding project', error);

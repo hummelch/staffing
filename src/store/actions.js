@@ -1,7 +1,8 @@
 import {
   LOAD_DB_BEGIN, LOAD_DB_ERROR, LOAD_DB_SUCCESS,
   CLOSE_PROJECT_BEGIN, CLOSE_PROJECT_ERROR, CLOSE_PROJECT_SUCCESS, ADD_STAFFING_SUCCESS,
-  ADD_PROJECT_SUCCESS
+  ADD_PROJECT_SUCCESS,
+  UPDATE_PROJECT_SUCCESS
 } from './types';
 
 export const loadDbBegin = () => ({
@@ -39,5 +40,10 @@ export const closeProjectError = error => ({
 
 export const addProjectSuccess = project => ({
   type: ADD_PROJECT_SUCCESS,
+  payload: { project }
+});
+
+export const updateProjectSuccess = project => ({
+  type: UPDATE_PROJECT_SUCCESS,
   payload: { project }
 });
