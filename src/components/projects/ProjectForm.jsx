@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { getWeekNumber } from '../../staffing/dateHelper';
 import { PROJECT_STATUS, getProjectStatusTranslation } from '../../staffing/projectStatus';
-import { addProject } from '../../store/thunks';
+import { addProject, updateProject } from '../../store/thunks';
 import store from '../../store';
+import PropTypes from 'prop-types';
 
 const defaultState = {
+  id: null,
   customer: '',
   name: '',
   number: '',
@@ -26,19 +28,24 @@ class ProjectForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
-    this.state = defaultState;
+    this.state = (props.location.state && props.location.state.project) ? props.location.state.project : defaultState;
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    store.dispatch(addProject(this.state));
+
+    if(this.state.id) {
+      store.dispatch(updateProject(this.state));
+    } else {
+      store.dispatch(addProject(this.state));
+    }
   }
 
   handleChange(event) {
     const inputName = event.target.name;
     let value = event.target.value;
 
-    switch(event.target.getAttribute('data-parse')) {
+    switch (event.target.getAttribute('data-parse')) {
       case 'integer':
         value = parseInt(value, 10);
         break;
@@ -54,13 +61,13 @@ class ProjectForm extends Component {
   }
 
   componentDidUpdate() {
-    if(this.state.end_week && this.state.end_week < this.state.start_week) {
+    if (this.state.end_week && this.state.end_week < this.state.start_week) {
       this.setState({ end_week: null })
     }
   }
 
   render() {
-    const { customer, name, estimation_days, start_week, end_week } = this.state;
+    const { id, customer, name, estimation_days, start_week, end_week } = this.state;
     const isSubmitDisabled = !(customer && name && estimation_days && start_week && end_week);
 
     const startingWeekOptions = Array.from(Array(52).keys()).map(index => {
@@ -69,17 +76,22 @@ class ProjectForm extends Component {
     });
 
     const endingWeekOptions = [<option key="0" value="">Select End Week</option>];
-    if(start_week) {
-      for(let week = start_week; week <= 52; week++) {
+    if (start_week) {
+      for (let week = start_week; week <= 52; week++) {
         endingWeekOptions.push(<option key={week} value={week}>{week}</option>)
       }
     }
 
     return (
       <form>
+        <input type="hidden" name="id" defaultValue={id} />
         <div className="grid-container">
 
           <div className="grid-x grid-padding-x">
+            <div className="cell">
+              <h4>{id ? `Edit project #${id}` : `Create new project`}</h4>
+            </div>
+
             <div className="cell">
               <label>Customer *
                 <input
@@ -89,7 +101,7 @@ class ProjectForm extends Component {
                   type="text"
                   placeholder="Customer name"
                   required
-                  />
+                />
               </label>
             </div>
 
@@ -102,7 +114,7 @@ class ProjectForm extends Component {
                   type="text"
                   placeholder="Project name"
                   required
-                  />
+                />
               </label>
             </div>
 
@@ -114,16 +126,16 @@ class ProjectForm extends Component {
                   defaultValue={this.state.number}
                   type="text"
                   placeholder="Teambox project number"
-                  />
+                />
               </label>
             </div>
 
             <div className="medium-3 cell">
               <label>Project Status
               <select
-                name="status"
-                onChange={this.handleChange}
-                defaultValue={this.state.status}
+                  name="status"
+                  onChange={this.handleChange}
+                  defaultValue={this.state.status}
                 >
                   <option value={PROJECT_STATUS.ORDERED}>{getProjectStatusTranslation(PROJECT_STATUS.ORDERED)}</option>
                   <option value={PROJECT_STATUS.HOLD}>{getProjectStatusTranslation(PROJECT_STATUS.HOLD)}</option>
@@ -140,7 +152,7 @@ class ProjectForm extends Component {
                   defaultValue={this.state.manager}
                   type="text"
                   placeholder="Project Manager name"
-                  />
+                />
               </label>
             </div>
 
@@ -152,7 +164,7 @@ class ProjectForm extends Component {
                   defaultValue={this.state.developer}
                   type="text"
                   placeholder="Favored Developer name"
-                  />
+                />
               </label>
             </div>
 
@@ -164,7 +176,7 @@ class ProjectForm extends Component {
                   defaultValue={this.state.description}
                   placeholder="Additional informations about the project like Jira/Confluence/VSTS Links..."
                   style={{ height: '10rem' }}
-                  ></textarea>
+                ></textarea>
               </label>
             </div>
 
@@ -179,7 +191,7 @@ class ProjectForm extends Component {
                   placeholder="Days"
                   data-parse="float"
                   required
-                  />
+                />
               </label>
             </div>
 
@@ -191,7 +203,7 @@ class ProjectForm extends Component {
                   defaultValue={this.state.start_week}
                   data-parse="integer"
                   required
-                  >
+                >
                   {startingWeekOptions}
                 </select>
               </label>
@@ -206,7 +218,7 @@ class ProjectForm extends Component {
                   disabled={!this.state.start_week}
                   data-parse="integer"
                   required
-                  >
+                >
                   {endingWeekOptions}
                 </select>
               </label>
@@ -220,7 +232,7 @@ class ProjectForm extends Component {
               type="submit"
               className="button"
               value="Submit"
-              />
+            />
           </div>
 
           <p className="help-text">* Required fields</p>
@@ -229,5 +241,9 @@ class ProjectForm extends Component {
     );
   }
 }
+
+ProjectForm.propTypes = {
+  project: PropTypes.object
+};
 
 export default ProjectForm;
