@@ -11,10 +11,12 @@
   }
 
   &__cell {
+    position: relative;
     padding: 0 0.5rem;
     border-left: 1px solid #fff;
     border-bottom: 1px solid #fff;
     text-align: center;
+    cursor: pointer;
 
     &--ok {
       background-color: #3adb76;
@@ -36,6 +38,30 @@
 
     &--name {
       text-align: left;
+    }
+  }
+
+  &__tooltip {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 7.5px 10px 7.5px;
+      border-color: transparent transparent #ffffff transparent;
     }
   }
 }
