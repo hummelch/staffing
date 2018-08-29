@@ -32,11 +32,11 @@
     },
     {
       "id": 4,
-      "name": "Chris",
-      "days_per_week": 4,
+      "name": "Exo",
+      "days_per_week": 0,
       "diff_days": {
         "32": 1,
-        "33": 0,
+        "33": 4,
         "35": 6
       }
     }
@@ -185,21 +185,6 @@
       "closed": false,
       "staffings": [],
       "id": 6
-    },
-    {
-      "customer": "fuzi",
-      "name": "buzi",
-      "number": "",
-      "status": "ordered",
-      "manager": "",
-      "developer": "",
-      "description": "<script>alert('xss')</script>",
-      "estimation_days": 12,
-      "start_week": 34,
-      "end_week": 34,
-      "closed": false,
-      "staffings": [],
-      "id": 7
     }
   ]
 }
