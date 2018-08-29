@@ -64,6 +64,20 @@ class ProjectStaffingDetail extends Component {
     return data;
   }
 
+  handleRemoveStaffingClick(e) {
+    e.preventDefault();
+
+    const id = parseInt(e.target.getAttribute('data-user-id'), 10);
+    const name = this.findNameByUserid(id);
+    const days = parseInt(e.target.getAttribute('data-days'), 10);
+    const week = parseInt(e.target.getAttribute('data-week'), 10);
+
+    if (window.confirm(`Really remove ${days} TW in KW ${week} from ${name} in "${this.props.project.name}"?`)) {
+      // this.setState({isClosing: true});
+      // store.dispatch(closeProject(this.props.project.id));
+    }
+  }
+
   handleDetailsToggleClick(e) {
     e.preventDefault();
 
@@ -78,11 +92,6 @@ class ProjectStaffingDetail extends Component {
     }
 
     this.setState({ visible });
-  }
-
-  handleRemoveStaffingClick(e) {
-    e.preventDefault();
-    alert('Implement with Confirm');
   }
 
   findNameByUserid(id) {
@@ -108,7 +117,13 @@ class ProjectStaffingDetail extends Component {
             <ul className={`projectStaffingDetail__details ${visible.includes(user.id) && `projectStaffingDetail__details--visible`}`}>
               {user.staffings.map((staffing, idx) => (
                 <li key={idx}>
-                  KW {staffing.week} - {staffing.days} TW <span className="projectStaffingDetail__removeStaffingLink" onClick={this.handleRemoveStaffingClick}>🗑</span>
+                  KW {staffing.week} - {staffing.days} TW
+                  <span className="projectStaffingDetail__removeStaffingLink"
+                        data-user-id={user.id}
+                        data-week={staffing.week}
+                        data-days={staffing.days}
+                        data-project-id={this.props.project.id}
+                        onClick={this.handleRemoveStaffingClick}>🗑</span>
                 </li>
               ))}
             </ul>
@@ -120,7 +135,8 @@ class ProjectStaffingDetail extends Component {
 }
 
 ProjectStaffingDetail.propTypes = {
-  staffings: PropTypes.array
+  staffings: PropTypes.array,
+  project: PropTypes.object
 };
 
 export default connect(mapStateToProps)(ProjectStaffingDetail);

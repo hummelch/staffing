@@ -135,7 +135,7 @@ class ProjectListItem extends Component {
             </TabPanel>
             <TabPanel>
               <StaffingForm project={project}/>
-              <ProjectStaffingDetail staffings={project.staffings} />
+              <ProjectStaffingDetail staffings={project.staffings} project={project} />
             </TabPanel>
           </Tabs>
         </div>
