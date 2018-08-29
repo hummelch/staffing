@@ -75,21 +75,19 @@ export function removeStaffing(projectId, userId, week, days) {
     const project = Object.assign({}, projects.find((item) => item.id === projectId));
     project.staffings.splice(project.staffings.findIndex(elem => (elem.user_id === userId && elem.week === week && elem.days === days)), 1);
 
-    console.log(project);
-
-    // return axios({
-    //   method: 'PUT',
-    //   url: `http://localhost:5000/projects/${projectId}`,
-    //   headers: { 'Content-Type': 'application/json' },
-    //   data: project
-    // })
-    //   .then((response) => {
-    //     dispatch(addStaffingSuccess(response.data));
-    //   })
-    //   .catch((error) => {
-    //     console.log('error close project', error);
-    //     // dispatch(loadDbError(error))
-    //   });
+    return axios({
+      method: 'PUT',
+      url: `http://localhost:5000/projects/${projectId}`,
+      headers: { 'Content-Type': 'application/json' },
+      data: project
+    })
+      .then((response) => {
+        dispatch(updateProjectSuccess(response.data));
+      })
+      .catch((error) => {
+        console.log('error remove staffing', error);
+        // dispatch(loadDbError(error))
+      });
   };
 }
 
