@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import store from '../../store';
-import { closeProject } from '../../store/thunks';
+import {closeProject} from '../../store/thunks';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
+import ProjectStaffingDetail from './ProjectStaffingDetail';
 import DescriptionList from '../descriptionList/DescriptionList';
 import StaffingForm from '../staffing/StaffingForm';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import './react-tabs.css';
-import { getProjectStatusTranslation } from '../../staffing/projectStatus';
+import {getProjectStatusTranslation} from '../../staffing/projectStatus';
 
 class ProjectListItem extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class ProjectListItem extends Component {
     e.preventDefault();
 
     if (window.confirm(`Really close project "${this.props.project.name}"?`)) {
-      this.setState({ isClosing: true });
+      this.setState({isClosing: true});
       store.dispatch(closeProject(this.props.project.id));
     }
   }
@@ -57,7 +58,7 @@ class ProjectListItem extends Component {
     const descriptions = [];
     const addToList = (title, description, condition = true) => {
       if (condition) {
-        descriptions.push({ title, description });
+        descriptions.push({title, description});
       }
     };
 
@@ -78,8 +79,8 @@ class ProjectListItem extends Component {
   }
 
   render() {
-    const { project } = this.props;
-    const { isClosing, isDetailVisible, tabIndex } = this.state;
+    const {project} = this.props;
+    const {isClosing, isDetailVisible, tabIndex} = this.state;
 
     if (isClosing) {
       return (
@@ -91,23 +92,6 @@ class ProjectListItem extends Component {
 
     const descriptions = this.createProjectDescriptionList(project);
     const staffedDays = this.getStaffedDays(project);
-
-    let staffingPanel = '';
-    if (project.staffings.length) {
-      const state = store.getState();
-      const findNameByUserid = (id) => {
-        const user = state.data.users.find(user => user.id === id);
-        return user.name;
-      };
-
-      staffingPanel = (
-        <ul>
-          {project.staffings.map((staffing, index) => (
-            <li key={index}>{findNameByUserid(staffing.user_id)}: KW {staffing.week} => {staffing.days} TW</li>
-          ))}
-        </ul>
-      );
-    }
 
     return (
       <div className="projectListItem callout">
@@ -122,7 +106,7 @@ class ProjectListItem extends Component {
           </button>
           {staffedDays >= project.estimation_days ? '' : (
             <a className="projectListItem__staffButton button small small-only-expanded success"
-              onClick={this.openDetailsAndShowStaffingTab}>Staff
+               onClick={this.openDetailsAndShowStaffingTab}>Staff
             </a>
           )}
           <span className="projectListItem__name" onClick={this.toggleDetail}>
@@ -130,11 +114,11 @@ class ProjectListItem extends Component {
             {project.customer} - {project.name}
           </span>
 
-          <Link to={{ pathname: '/new-project', state: { project } }}> <span role="img" aria-label="edit project">✏️</span></Link>
+          <Link to={{pathname: '/new-project', state: {project}}}> <span role="img" aria-label="edit project">✏️</span></Link>
         </div>
 
         <div className={`projectListItem__${isDetailVisible ? 'detailVisible' : 'detailHidden'}`}>
-          <Tabs selectedIndex={tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
+          <Tabs selectedIndex={tabIndex} onSelect={tabIndex => this.setState({tabIndex})}>
             <TabList>
               <Tab>Facts</Tab>
               <Tab>Details</Tab>
@@ -144,14 +128,14 @@ class ProjectListItem extends Component {
             </TabList>
 
             <TabPanel>
-              <DescriptionList items={descriptions} />
+              <DescriptionList items={descriptions}/>
             </TabPanel>
             <TabPanel>
               <p>{project.description}</p>
             </TabPanel>
             <TabPanel>
-              <StaffingForm project={project} />
-              {staffingPanel}
+              <StaffingForm project={project}/>
+              <ProjectStaffingDetail staffings={project.staffings} project={project} />
             </TabPanel>
           </Tabs>
         </div>
