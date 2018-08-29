@@ -66,6 +66,33 @@ export function addStaffings(projectId, staffings) {
   };
 }
 
+export function removeStaffing(projectId, userId, week, days) {
+  return dispatch => {
+    // dispatch(loadDbBegin());
+
+    const state = store.getState();
+    const { projects } = state.data;
+    const project = Object.assign({}, projects.find((item) => item.id === projectId));
+    project.staffings.splice(project.staffings.findIndex(elem => (elem.user_id === userId && elem.week === week && elem.days === days)), 1);
+
+    console.log(project);
+
+    // return axios({
+    //   method: 'PUT',
+    //   url: `http://localhost:5000/projects/${projectId}`,
+    //   headers: { 'Content-Type': 'application/json' },
+    //   data: project
+    // })
+    //   .then((response) => {
+    //     dispatch(addStaffingSuccess(response.data));
+    //   })
+    //   .catch((error) => {
+    //     console.log('error close project', error);
+    //     // dispatch(loadDbError(error))
+    //   });
+  };
+}
+
 
 export function addProject(project) {
   return dispatch => {

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
+import store from '../../store';
 
 import './projectStaffingDetail.css';
+import {removeStaffing} from "../../store/thunks";
 
 
 const mapStateToProps = state => {
@@ -74,7 +76,7 @@ class ProjectStaffingDetail extends Component {
 
     if (window.confirm(`Really remove ${days} TW in KW ${week} from ${name} in "${this.props.project.name}"?`)) {
       // this.setState({isClosing: true});
-      // store.dispatch(closeProject(this.props.project.id));
+      store.dispatch(removeStaffing(this.props.project.id, id, week, days));
     }
   }
 
