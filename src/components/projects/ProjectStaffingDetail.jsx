@@ -22,26 +22,37 @@ class ProjectStaffingDetail extends Component {
   }
 
   get combinedUserAndStaffingData() {
-    return [
-      {
-        id: 1,
-        name: this.findNameByUserid(1),
-        total: 6,
-        staffings: [
-          {user_id: 1, days: 3, week: 35},
-          {user_id: 1, days: 1, week: 35},
-          {user_id: 1, days: 2, week: 36}
-        ]
-      },
-      {
-        id: 2,
-        name: this.findNameByUserid(2),
-        total: 3,
-        staffings: [
-          {user_id: 1, days: 3, week: 35}
-        ]
+
+    const data = [];
+
+    this.props.staffings.forEach(staffing => {
+      const findByUserId = element => element.id === staffing.user_id;
+
+      if(!data.find(findByUserId)) {
+        data.push({
+          id: staffing.user_id,
+          name: this.findNameByUserid(staffing.user_id),
+          total: 0,
+          staffings: []
+        });
       }
-    ];
+
+      const user = data.find(findByUserId);
+      user.total += staffing.days;
+      user.staffings.push(staffing);
+    });
+
+    data.sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    });
+
+    return data;
   }
 
   handleDetailsToggleClick(e) {
