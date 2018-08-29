@@ -22,7 +22,6 @@ class ProjectStaffingDetail extends Component {
   }
 
   get combinedUserAndStaffingData() {
-
     const data = [];
 
     this.props.staffings.forEach(staffing => {
@@ -40,6 +39,16 @@ class ProjectStaffingDetail extends Component {
       const user = data.find(findByUserId);
       user.total += staffing.days;
       user.staffings.push(staffing);
+
+      user.staffings.sort((a, b) => {
+        if (a.week > b.week) {
+          return 1;
+        }
+        if (a.week < b.week) {
+          return -1;
+        }
+        return 0;
+      });
     });
 
     data.sort((a, b) => {
