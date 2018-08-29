@@ -15,6 +15,7 @@
   &__visibilityIndicator {
     display: inline-block;
     min-width: 20px;
+    pointer-events: none;
   }
 
   &__details {
