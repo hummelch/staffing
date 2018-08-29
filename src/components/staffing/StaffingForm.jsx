@@ -33,10 +33,10 @@ class StaffingForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.defaultState = {
-      user: undefined,
-      tw: undefined,
-      kwFrom: undefined,
-      kwTo: undefined,
+      user: '',
+      tw: '',
+      kwFrom: '',
+      kwTo: '',
       isFormReady: false
     };
 
