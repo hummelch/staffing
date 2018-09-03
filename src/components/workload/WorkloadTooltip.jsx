@@ -15,17 +15,33 @@ class WorkloadTooltip extends Component {
     const { id, week } = this.props;
 
     const user = this.props.users.find(user => user.id === id);
-    const projects = this.props.projects.filter(project => project.staffings.find(staffing => staffing.user_id === id && staffing.week === parseInt(week, 10)));
-    debugger
+    const staffings = [];
+
+    this.props.projects.forEach(project => {
+      project.staffings.forEach(staffing => {
+        console.log('staffing', staffing);
+
+        if(staffing.user_id === id && staffing.week === parseInt(week, 10)) {
+          staffings.push(`${project.name} - ${staffing.days} TW`);
+        }
+      })
+    });
+    // debugger
 
     // TODO refactor staffings week to year-week combination - from int to string
     // e.g. 32 to "2018-32"
 
+    // TODO Add default days per week OR special days per week
+
+    if(!staffings.length) {
+      staffings.push('Not staffed yet');
+    }
+
     return (
       <div className="workloadTooltip">
         <div className="workloadTooltip__name">{user.name} - KW {week}</div>
-        <ul>
-          {projects.map((project, idx) => <li key={idx}>{project.name}</li>)}
+        <ul className="workloadTooltip__list">
+          {staffings.map((staffing, idx) => <li className="workloadTooltip__item" key={idx}>{staffing}</li>)}
         </ul>
       </div>
     );

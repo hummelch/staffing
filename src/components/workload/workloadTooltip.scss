@@ -4,9 +4,14 @@
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
+  color: #0a0a0a;
   padding: 1rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
   z-index: 1;
+  text-align: left;
+  font-weight: normal;
+  white-space: nowrap;
+  font-size: 0.85rem;
 
   &:before {
     content: '';
@@ -22,7 +27,10 @@
   }
 
   &__name {
-    white-space: nowrap;
     font-weight: bold;
+  }
+
+  &__list {
+    margin-bottom: 0;
   }
 }
