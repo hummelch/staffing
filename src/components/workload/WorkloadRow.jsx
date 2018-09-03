@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import WorkloadTooltip from './WorkloadTooltip';
 
-const defaultState = {
-  active: null
-};
 
 class WorkloadRow extends Component {
 
   constructor(props) {
     super(props);
-    this.handleTooltipClick = this.handleTooltipClick.bind(this);
     this.renderTooltip = this.renderTooltip.bind(this);
-
-    this.state = defaultState;
+    this.handleClick = this.handleClick.bind(this);
   }
 
   getClassNameByWorkload(daysLeft) {
@@ -27,41 +23,44 @@ class WorkloadRow extends Component {
     return 'workload__cell--ok';
   }
 
-  handleTooltipClick(e) {
-    e.preventDefault();
+  // handleTooltipClick(e) {
+  //   e.preventDefault();
 
-    console.log('click');
-    const id = parseInt(e.target.getAttribute('data-user-id'), 10);
-    const week = e.target.getAttribute('data-week');
+  //   console.log('click');
+  //   const id = parseInt(e.target.getAttribute('data-user-id'), 10);
+  //   const week = e.target.getAttribute('data-week');
 
-    if(this.state.active && this.state.active.id === id && this.state.active.week === week) {
-      this.setState(defaultState);
-    } else {
-      this.setState({
-        active: {
-          id: id,
-          week: week
-        }
-      });
-    }
+  //   if (this.state.active && this.state.active.id === id && this.state.active.week === week) {
+  //     this.setState(defaultState);
+  //   } else {
+  //     this.setState({
+  //       active: {
+  //         id: id,
+  //         week: week
+  //       }
+  //     });
+  //   }
+  // }
+
+  handleClick(e) {
+    e.stopPropagation();
+    this.props.onClick(e);
   }
 
   renderTooltip(id, week) {
-    if(this.state.active) {
-      console.log('render', id, week, this.state.active.id, this.state.active.week);
-    }
+    const { tooltip } = this.props;
 
-    if(!this.state.active || this.state.active.id !== id || this.state.active.week !== week) {
+    if (!tooltip || tooltip.id !== id || tooltip.week !== week) {
       return '';
     }
 
-    return <div className="workload__tooltip">Tooltip for {id} - {week}</div>;
+    return <WorkloadTooltip id={id} week={week} />
   }
 
   render() {
     const { user } = this.props;
     const weeks = Object.assign({}, user.calculated_weeks);
-    for (let week in weeks) {
+    for (const week in weeks) {
       if (week < this.props.from || week > this.props.to) {
         delete weeks[week];
       }
@@ -72,7 +71,7 @@ class WorkloadRow extends Component {
         <td className="workload__cell workload__cell--name">{user.name}</td>
 
         {Object.keys(weeks).map(week => (
-          <td onClick={this.handleTooltipClick} data-user-id={user.id} data-week={week} key={`${user.id}-${week}`} className={`workload__cell ${this.getClassNameByWorkload(weeks[week].days_left)}`}>
+          <td onClick={this.handleClick} data-user-id={user.id} data-week={week} key={`${user.id}-${week}`} className={`workload__cell ${this.getClassNameByWorkload(weeks[week].days_left)}`}>
             {weeks[week].days_left}
             {this.renderTooltip(user.id, week)}
           </td>
@@ -90,7 +89,8 @@ WorkloadRow.defaultProps = {
 WorkloadRow.propTypes = {
   from: PropTypes.number,
   to: PropTypes.number,
-  user: PropTypes.object
+  user: PropTypes.object,
+  tooltip: PropTypes.object
 };
 
 export default WorkloadRow;
