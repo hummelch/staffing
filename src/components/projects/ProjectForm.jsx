@@ -34,8 +34,9 @@ class ProjectForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    if(this.state.id) {
+    if (this.state.id) {
       store.dispatch(updateProject(this.state));
+      this.props.history.push('/');
     } else {
       store.dispatch(addProject(this.state));
     }

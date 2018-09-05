@@ -11,8 +11,10 @@ class WorkloadRow extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  getClassNameByWorkload(daysLeft) {
-    if (daysLeft < 0) {
+  getClassNameByWorkload(daysLeft, isNotAvailable) {
+    if (isNotAvailable && daysLeft === 0) {
+      return 'workload__cell--notAvailable';
+    } else if (daysLeft < 0) {
       return 'workload__cell--alert';
     } else if (daysLeft === 0) {
       return 'workload__cell--full';
@@ -71,7 +73,7 @@ class WorkloadRow extends Component {
         <td className="workload__cell workload__cell--name">{user.name}</td>
 
         {Object.keys(weeks).map(week => (
-          <td onClick={this.handleClick} data-user-id={user.id} data-week={week} key={`${user.id}-${week}`} className={`workload__cell ${this.getClassNameByWorkload(weeks[week].days_left)}`}>
+          <td onClick={this.handleClick} data-user-id={user.id} data-week={week} key={`${user.id}-${week}`} className={`workload__cell ${this.getClassNameByWorkload(weeks[week].days_left, weeks[week].is_not_available)}`}>
             {weeks[week].days_left}
             {this.renderTooltip(user.id, week)}
           </td>
