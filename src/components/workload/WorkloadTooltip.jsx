@@ -13,14 +13,11 @@ const mapStateToProps = state => {
 class WorkloadTooltip extends Component {
   render() {
     const { id, week } = this.props;
-
     const user = this.props.users.find(user => user.id === id);
     const staffings = [];
 
     this.props.projects.forEach(project => {
       project.staffings.forEach(staffing => {
-        console.log('staffing', staffing);
-
         if(staffing.user_id === id && staffing.week === parseInt(week, 10)) {
           staffings.push(`${project.name} - ${staffing.days} TW`);
         }
