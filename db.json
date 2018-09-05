@@ -5,9 +5,9 @@
       "name": "Jan",
       "days_per_week": 3,
       "diff_days": {
-        "31": 1,
-        "32": 2,
-        "33": 3
+        "2018-31": 1,
+        "2018-32": 2,
+        "2018-33": 3
       }
     },
     {
@@ -15,9 +15,9 @@
       "name": "Jonas",
       "days_per_week": 4,
       "diff_days": {
-        "32": 1,
-        "33": 0,
-        "35": 6
+        "2018-32": 1,
+        "2018-33": 0,
+        "2018-35": 6
       }
     },
     {
@@ -25,9 +25,9 @@
       "name": "Alex",
       "days_per_week": 4,
       "diff_days": {
-        "32": 1,
-        "33": 0,
-        "35": 6
+        "2018-32": 1,
+        "2018-33": 0,
+        "2018-35": 6
       }
     },
     {
@@ -35,9 +35,9 @@
       "name": "Exo",
       "days_per_week": 0,
       "diff_days": {
-        "32": 1,
-        "33": 4,
-        "35": 6
+        "2018-32": 1,
+        "2018-33": 4,
+        "2018-35": 6
       }
     }
   ],
@@ -52,24 +52,24 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimation_days": 4,
-      "start_week": 5,
-      "end_week": 7,
+      "start_week": "2018-5",
+      "end_week": "2018-7",
       "closed": false,
       "staffings": [
         {
           "user_id": 1,
           "days": 1,
-          "week": 32
+          "week": "2018-5"
         },
         {
           "user_id": 2,
           "days": 2,
-          "week": 33
+          "week": "2018-5"
         },
         {
           "user_id": 2,
           "days": 1,
-          "week": 34
+          "week": "2018-5"
         }
       ]
     },
@@ -90,17 +90,17 @@
         {
           "user_id": 1,
           "days": 1,
-          "week": 5
+          "week": "2018-5"
         },
         {
           "user_id": 2,
           "days": 2,
-          "week": 6
+          "week": "2018-6"
         },
         {
           "user_id": 2,
           "days": 1,
-          "week": 7
+          "week": "2018-7"
         }
       ]
     },
@@ -114,8 +114,8 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimation_days": 4,
-      "start_week": 31,
-      "end_week": 37,
+      "start_week": "2018-31",
+      "end_week": "2018-37",
       "closed": false,
       "staffings": []
     },
@@ -129,19 +129,19 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimation_days": 4,
-      "start_week": 31,
-      "end_week": 37,
+      "start_week": "2018-31",
+      "end_week": "2018-37",
       "closed": false,
       "staffings": [
         {
           "user_id": 1,
           "days": 1,
-          "week": 35
+          "week": "2018-35"
         },
         {
           "user_id": 2,
           "days": 1,
-          "week": 37
+          "week": "2018-37"
         }
       ]
     },
@@ -155,19 +155,19 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimation_days": 4,
-      "start_week": 31,
-      "end_week": 37,
+      "start_week": "2018-31",
+      "end_week": "2018-37",
       "closed": false,
       "staffings": [
         {
           "user_id": 1,
           "days": 3,
-          "week": 35
+          "week": "2018-35"
         },
         {
           "user_id": 2,
           "days": 3,
-          "week": 37
+          "week": "2018-37"
         }
       ]
     },
@@ -180,8 +180,8 @@
       "developer": "",
       "description": "",
       "estimation_days": 23,
-      "start_week": 34,
-      "end_week": 36,
+      "start_week": "2018-32",
+      "end_week": "2018-39",
       "closed": false,
       "staffings": [],
       "id": 6
