@@ -26,15 +26,11 @@ class WorkloadTooltip extends Component {
         }
       })
     });
-    // debugger
-
-    // TODO refactor staffings week to year-week combination - from int to string
-    // e.g. 32 to "2018-32"
 
     // TODO Add default days per week OR special days per week
 
     if(!staffings.length) {
-      staffings.push('Not staffed yet');
+      staffings.push('Nothing staffed yet');
     }
 
     return (
