@@ -3,47 +3,27 @@
     {
       "id": 1,
       "name": "Jan",
-      "days_per_week": 3,
-      "diff_days": {
-        "31": 1,
-        "32": 2,
-        "33": 3
-      }
+      "days_per_week": 3
     },
     {
       "id": 2,
       "name": "Jonas",
-      "days_per_week": 4,
-      "diff_days": {
-        "32": 1,
-        "33": 0,
-        "35": 6
-      }
+      "days_per_week": 4
     },
     {
       "id": 3,
       "name": "Alex",
-      "days_per_week": 4,
-      "diff_days": {
-        "32": 1,
-        "33": 0,
-        "35": 6
-      }
+      "days_per_week": 4
     },
     {
       "id": 4,
       "name": "Exo",
-      "days_per_week": 0,
-      "diff_days": {
-        "32": 1,
-        "33": 4,
-        "35": 6
-      }
+      "days_per_week": 0
     }
   ],
   "data": [
     {
-      "year": 2018,
+      "id": 2018,
       "projects": [
         {
           "id": 1,
@@ -203,12 +183,12 @@
       ]
     },
     {
-      "year": 2019,
+      "id": 2019,
       "projects": [],
       "userCustomDays": []
     },
     {
-      "year": 2020,
+      "id": 2020,
       "projects": [],
       "userCustomDays": []
     }
