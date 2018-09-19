@@ -2,17 +2,26 @@ import { loadDbBegin, loadDbSuccess, loadDbError, closeProjectSuccess, addStaffi
 import axios from 'axios';
 import store from './index';
 
+const host = 'http://localhost:5000';
+const year = '2018';
+
 export function loadDb() {
   return dispatch => {
     dispatch(loadDbBegin());
 
-    return axios.get('http://localhost:5000/db')
-      .then((response) => {
-        dispatch(loadDbSuccess(response.data));
-      })
-      .catch((error) => {
-        dispatch(loadDbError(error))
-      });
+    return axios.all([
+      axios.get(`${host}/users`),
+      axios.get(`${host}/data/${year}`)
+    ]).then(axios.spread((users, year) => {
+      dispatch(loadDbSuccess({
+        users: users.data,
+        projects: year.data.projects,
+        userCustomDays: year.data.userCustomDays
+      }));
+    })).catch((error) => {
+      console.log('error');
+      dispatch(loadDbError(error))
+    });
   };
 }
 
