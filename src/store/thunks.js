@@ -1,18 +1,16 @@
 import { loadDbBegin, loadDbSuccess, loadDbError, closeProjectSuccess, addStaffingSuccess, addProjectSuccess, updateProjectSuccess } from './actions';
 import axios from 'axios';
 import store from './index';
-
-const host = 'http://localhost:5000';
-const year = '2018';
+import {config} from '../config';
 
 export function loadDb() {
   return dispatch => {
     dispatch(loadDbBegin());
 
     return axios.all([
-      axios.get(`${host}/users`),
-      axios.get(`${host}/projects?year=${year}&closed=false`),
-      axios.get(`${host}/userCustomDays?year=${year}`)
+      axios.get(`${config.databaseHost}/users`),
+      axios.get(`${config.databaseHost}/projects?year=${config.year}&closed=false`),
+      axios.get(`${config.databaseHost}/userCustomDays?year=${config.year}`)
     ]).then(axios.spread((users, projects, userCustomDays) => {
       dispatch(loadDbSuccess({
         users: users.data,
@@ -36,7 +34,7 @@ export function closeProject(projectId) {
 
     return axios({
       method: 'PUT',
-      url: `${host}/projects/${project.id}`,
+      url: `${config.databaseHost}/projects/${project.id}`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -61,7 +59,7 @@ export function addStaffings(projectId, staffings) {
 
     return axios({
       method: 'PUT',
-      url: `${host}/projects/${project.id}`,
+      url: `${config.databaseHost}/projects/${project.id}`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -86,7 +84,7 @@ export function removeStaffing(projectId, userId, week, days) {
 
     return axios({
       method: 'PUT',
-      url: `${host}/projects/${projectId}`,
+      url: `${config.databaseHost}/projects/${projectId}`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -107,7 +105,7 @@ export function addProject(project) {
 
     return axios({
       method: 'POST',
-      url: `${host}/projects`,
+      url: `${config.databaseHost}/projects`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -127,7 +125,7 @@ export function updateProject(project) {
 
     return axios({
       method: 'PUT',
-      url: `${host}/projects/${project.id}`,
+      url: `${config.databaseHost}/projects/${project.id}`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
