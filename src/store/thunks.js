@@ -11,12 +11,13 @@ export function loadDb() {
 
     return axios.all([
       axios.get(`${host}/users`),
-      axios.get(`${host}/data/${year}`)
-    ]).then(axios.spread((users, year) => {
+      axios.get(`${host}/projects?year=${year}&closed=false`),
+      axios.get(`${host}/userCustomDays?year=${year}`)
+    ]).then(axios.spread((users, projects, userCustomDays) => {
       dispatch(loadDbSuccess({
         users: users.data,
-        projects: year.data.projects,
-        userCustomDays: year.data.userCustomDays
+        projects: projects.data,
+        userCustomDays: userCustomDays.data
       }));
     })).catch((error) => {
       dispatch(loadDbError(error))
