@@ -19,7 +19,6 @@ export function loadDb() {
         userCustomDays: year.data.userCustomDays
       }));
     })).catch((error) => {
-      console.log('error');
       dispatch(loadDbError(error))
     });
   };
@@ -36,7 +35,7 @@ export function closeProject(projectId) {
 
     return axios({
       method: 'PUT',
-      url: `http://localhost:5000/projects/${project.id}`,
+      url: `${host}/projects/${project.id}`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -44,7 +43,7 @@ export function closeProject(projectId) {
         dispatch(closeProjectSuccess(response.data));
       })
       .catch((error) => {
-        console.log('error close project', error);
+        console.error('error close project', error);
         // dispatch(loadDbError(error))
       });
   };
@@ -61,7 +60,7 @@ export function addStaffings(projectId, staffings) {
 
     return axios({
       method: 'PUT',
-      url: `http://localhost:5000/projects/${project.id}`,
+      url: `${host}/projects/${project.id}`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -69,7 +68,7 @@ export function addStaffings(projectId, staffings) {
         dispatch(addStaffingSuccess(response.data));
       })
       .catch((error) => {
-        console.log('error close project', error);
+        console.error('error close project', error);
         // dispatch(loadDbError(error))
       });
   };
@@ -86,7 +85,7 @@ export function removeStaffing(projectId, userId, week, days) {
 
     return axios({
       method: 'PUT',
-      url: `http://localhost:5000/projects/${projectId}`,
+      url: `${host}/projects/${projectId}`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -94,7 +93,7 @@ export function removeStaffing(projectId, userId, week, days) {
         dispatch(updateProjectSuccess(response.data));
       })
       .catch((error) => {
-        console.log('error remove staffing', error);
+        console.error('error remove staffing', error);
         // dispatch(loadDbError(error))
       });
   };
@@ -107,7 +106,7 @@ export function addProject(project) {
 
     return axios({
       method: 'POST',
-      url: `http://localhost:5000/projects`,
+      url: `${host}/projects`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -115,7 +114,7 @@ export function addProject(project) {
         dispatch(addProjectSuccess(response.data));
       })
       .catch((error) => {
-        console.log('error adding project', error);
+        console.error('error adding project', error);
         // dispatch(loadDbError(error))
       });
   };
@@ -127,7 +126,7 @@ export function updateProject(project) {
 
     return axios({
       method: 'PUT',
-      url: `http://localhost:5000/projects/${project.id}`,
+      url: `${host}/projects/${project.id}`,
       headers: { 'Content-Type': 'application/json' },
       data: project
     })
@@ -135,7 +134,7 @@ export function updateProject(project) {
         dispatch(updateProjectSuccess(response.data));
       })
       .catch((error) => {
-        console.log('error adding project', error);
+        console.error('error adding project', error);
         // dispatch(loadDbError(error))
       });
   };
