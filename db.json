@@ -3,47 +3,28 @@
     {
       "id": 1,
       "name": "Jan",
-      "days_per_week": 3,
-      "diff_days": {
-        "31": 1,
-        "32": 2,
-        "33": 3
-      }
+      "days_per_week": 3
     },
     {
       "id": 2,
       "name": "Jonas",
-      "days_per_week": 4,
-      "diff_days": {
-        "32": 1,
-        "33": 0,
-        "35": 6
-      }
+      "days_per_week": 4
     },
     {
       "id": 3,
       "name": "Alex",
-      "days_per_week": 4,
-      "diff_days": {
-        "32": 1,
-        "33": 0,
-        "35": 6
-      }
+      "days_per_week": 4
     },
     {
       "id": 4,
       "name": "Exo",
-      "days_per_week": 0,
-      "diff_days": {
-        "32": 1,
-        "33": 4,
-        "35": 6
-      }
+      "days_per_week": 0
     }
   ],
   "projects": [
     {
       "id": 1,
+      "year": 2018,
       "customer": "Customer Name",
       "name": "Staffed project",
       "number": "123.1234567",
@@ -75,6 +56,7 @@
     },
     {
       "id": 2,
+      "year": 2018,
       "customer": "Customer Name 2",
       "name": "Closed project",
       "number": "123.1234567",
@@ -106,6 +88,7 @@
     },
     {
       "id": 3,
+      "year": 2018,
       "customer": "Customer",
       "name": "Not staffed project",
       "number": "123.1234567",
@@ -121,6 +104,7 @@
     },
     {
       "id": 4,
+      "year": 2018,
       "customer": "Customer Name",
       "name": "Half staffed project",
       "number": "123.1234567",
@@ -147,6 +131,7 @@
     },
     {
       "id": 5,
+      "year": 2018,
       "customer": "Customer",
       "name": "Overstaffed project",
       "number": "123.1234567",
@@ -172,6 +157,7 @@
       ]
     },
     {
+      "year": 2019,
       "customer": "foo",
       "name": "bar",
       "number": "",
@@ -185,6 +171,26 @@
       "closed": false,
       "staffings": [],
       "id": 6
+    }
+  ],
+  "userCustomDays": [
+    {
+      "userId": 1,
+      "year": 2018,
+      "week": 34,
+      "days": 1
+    },
+    {
+      "userId": 2,
+      "year": 2018,
+      "week": 37,
+      "days": 0
+    },
+    {
+      "userId": 2,
+      "year": 2019,
+      "week": 37,
+      "days": 0
     }
   ]
 }

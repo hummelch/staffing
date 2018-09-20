@@ -1,31 +1,30 @@
-export const calculateWorkloadForUser = (stateUser, stateProjects) => {
-  const user = Object.assign({}, stateUser, { calculated_weeks: {} });
+export const calculateWorkloadForUser = (user, projects, userCustomDays) => {
+  const updatedUser = Object.assign({}, user, { calculated_weeks: {} });
 
   // count up all default week days for all 52 weeks per year
   for (let week = 1; week <= 52; week++) {
-
-    let isNotAvailable = stateUser.days_per_week === 0;
-    const weekHasSpecialValue = stateUser.diff_days.hasOwnProperty(week);
-    const daysLeft = weekHasSpecialValue ? stateUser.diff_days[week] : stateUser.days_per_week;
-
-    if (weekHasSpecialValue && stateUser.diff_days[week] === 0) {
-      isNotAvailable = true;
-    }
-
-    user.calculated_weeks[week] = {
-      days_left: daysLeft,
-      is_not_available: isNotAvailable
+    updatedUser.calculated_weeks[week] = {
+      days_left: user.days_per_week,
+      is_not_available: user.days_per_week === 0
     };
   }
 
+  // check custom days
+  userCustomDays.forEach(custom => {
+    if(custom.user_id === user.id) {
+      updatedUser.calculated_weeks[custom.week].days_left = custom.days;
+      updatedUser.calculated_weeks[custom.week].is_not_available = custom.days === 0;
+    }
+  });
+
   // subtract all staffed projects
-  for (let project of stateProjects) {
+  for (const project of projects) {
     if (!project.closed) {
-      subtractStaffedWorkingDays(user, project);
+      subtractStaffedWorkingDays(updatedUser, project);
     }
   }
 
-  return user;
+  return updatedUser;
 };
 
 const subtractStaffedWorkingDays = (user, project) => {
@@ -33,6 +32,6 @@ const subtractStaffedWorkingDays = (user, project) => {
     if (user.id === staffing.user_id) {
       user.calculated_weeks[staffing.week].days_left -= staffing.days;
     }
-  };
+  }
 };
 

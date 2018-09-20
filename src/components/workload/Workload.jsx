@@ -14,8 +14,8 @@ const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
 
 const mapStateToProps = state => {
-  const users = state.data.users.map(stateUser => {
-    return calculateWorkloadForUser(stateUser, state.data.projects);
+  const users = state.data.users.map(user => {
+    return calculateWorkloadForUser(user, state.data.projects, state.data.userCustomDays);
   }).sort((a, b) => {
     if (a.name < b.name) {
       return -1;
@@ -101,7 +101,7 @@ class Workload extends Component {
           handleStyle={[Workload.handleStyle, Workload.handleStyle]}
           trackStyle={[Workload.trackStyle, Workload.trackStyle]}
         />
-        <WorkloadTable from={this.state.from} to={this.state.to} users={this.props.users} />
+        <WorkloadTable from={this.state.from} to={this.state.to} users={this.props.users}/>
       </div>
     );
   }

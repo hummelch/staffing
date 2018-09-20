@@ -8,7 +8,7 @@ import {calculateWorkloadForUser} from "../../staffing/prepareUserData";
 
 const mapStateToProps = state => {
   const users = state.data.users.map(stateUser => {
-    return calculateWorkloadForUser(stateUser, state.data.projects);
+    return calculateWorkloadForUser(stateUser, state.data.projects, state.data.userCustomDays);
   }).sort((a, b) => {
     if (a.name < b.name) {
       return -1;
