@@ -74,8 +74,8 @@ class WorkloadRow extends Component {
 
         {Object.keys(weeks).map(week => (
           <td onClick={this.handleClick} data-user-id={user.id} data-week={week} key={`${user.id}-${week}`} className={`workload__cell ${this.getClassNameByWorkload(weeks[week].days_left, weeks[week].is_not_available)}`}>
-            {weeks[week].is_not_available ? '-' : weeks[week].days_left}
-            {!weeks[week].is_not_available && this.renderTooltip(user.id, week)}
+            {weeks[week].days_left}
+            {this.renderTooltip(user.id, week)}
           </td>
         ))}
       </tr>
