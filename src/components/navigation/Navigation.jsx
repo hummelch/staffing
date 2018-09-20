@@ -18,7 +18,7 @@ class Navigation extends Component {
           </ul>
 
           <main className="content">
-            <Route path="/" component={Dashboard} />
+            <Route exact path="/" component={Dashboard} />
             <Route path="/new-project" component={ProjectForm} />
           </main>
         </div>
