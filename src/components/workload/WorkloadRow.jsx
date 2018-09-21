@@ -26,25 +26,6 @@ class WorkloadRow extends Component {
     return 'workload__cell--ok';
   }
 
-  // handleTooltipClick(e) {
-  //   e.preventDefault();
-
-  //   console.log('click');
-  //   const id = parseInt(e.target.getAttribute('data-user-id'), 10);
-  //   const week = e.target.getAttribute('data-week');
-
-  //   if (this.state.active && this.state.active.id === id && this.state.active.week === week) {
-  //     this.setState(defaultState);
-  //   } else {
-  //     this.setState({
-  //       active: {
-  //         id: id,
-  //         week: week
-  //       }
-  //     });
-  //   }
-  // }
-
   handleClick(e) {
     e.stopPropagation();
     this.props.onClick(e);
@@ -73,7 +54,7 @@ class WorkloadRow extends Component {
       <tr className="workload__row">
         <td className="workload__cell workload__cell--name">
           {user.name}
-          <Link to={{pathname: '/user', state: {user}}} className="workload__editLink"> <span role="img" aria-label="edit user">✏️</span></Link>
+          <Link to={{pathname: '/user', state: {userId: user.id}}} className="workload__editLink"> <span role="img" aria-label="edit user">✏️</span></Link>
         </td>
 
         {Object.keys(weeks).map(week => (
