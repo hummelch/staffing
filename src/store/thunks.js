@@ -1,4 +1,13 @@
-import { loadDbBegin, loadDbSuccess, loadDbError, closeProjectSuccess, addStaffingSuccess, addProjectSuccess, updateProjectSuccess } from './actions';
+import {
+  loadDbBegin,
+  loadDbSuccess,
+  loadDbError,
+  closeProjectSuccess,
+  addStaffingSuccess,
+  addProjectSuccess,
+  updateProjectSuccess,
+  addUserSuccess, updateUserSuccess
+} from './actions';
 import axios from 'axios';
 import store from './index';
 import {config} from '../config';
@@ -133,7 +142,47 @@ export function updateProject(project) {
         dispatch(updateProjectSuccess(response.data));
       })
       .catch((error) => {
-        console.error('error adding project', error);
+        console.error('error updating project', error);
+        // dispatch(loadDbError(error))
+      });
+  };
+}
+
+export function addUser(user) {
+  return dispatch => {
+    // dispatch(loadDbBegin());
+
+    return axios({
+      method: 'POST',
+      url: `${config.databaseHost}/users`,
+      headers: { 'Content-Type': 'application/json' },
+      data: user
+    })
+      .then((response) => {
+        dispatch(addUserSuccess(response.data));
+      })
+      .catch((error) => {
+        console.error('error adding user', error);
+        // dispatch(loadDbError(error))
+      });
+  };
+}
+
+export function updateUser(user) {
+  return dispatch => {
+    // dispatch(loadDbBegin());
+
+    return axios({
+      method: 'PUT',
+      url: `${config.databaseHost}/users/${user.id}`,
+      headers: { 'Content-Type': 'application/json' },
+      data: user
+    })
+      .then((response) => {
+        dispatch(updateUserSuccess(response.data));
+      })
+      .catch((error) => {
+        console.error('error updating user', error);
         // dispatch(loadDbError(error))
       });
   };

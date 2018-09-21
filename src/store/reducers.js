@@ -3,7 +3,7 @@ import {
   CLOSE_PROJECT_SUCCESS,
   ADD_STAFFING_SUCCESS,
   ADD_PROJECT_SUCCESS,
-  UPDATE_PROJECT_SUCCESS
+  UPDATE_PROJECT_SUCCESS, ADD_USER_SUCCESS, UPDATE_USER_SUCCESS
 } from './types';
 
 const initialState = {
@@ -67,13 +67,34 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case UPDATE_PROJECT_SUCCESS:
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        projects: state.data.projects.map(project => (project.id === action.payload.project.id) ? action.payload.project : project)
-      }
-    };
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          projects: state.data.projects.map(project => (project.id === action.payload.project.id) ? action.payload.project : project)
+        }
+      };
+
+    case ADD_USER_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          users: [
+            ...state.data.users,
+            action.payload.user
+          ]
+        }
+      };
+
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          users: state.data.users.map(user => (user.id === action.payload.user.id) ? action.payload.user : user)
+        }
+      };
 
     default:
       return state;
