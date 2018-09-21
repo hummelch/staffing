@@ -87,7 +87,6 @@ class ProjectForm extends Component {
   }
 
   componentWillUnmount() {
-    console.log('componentWillUnmount');
     clearInterval(this.newProjectWasCreatedTimeout);
   }
 
