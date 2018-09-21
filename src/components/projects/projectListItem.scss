@@ -1,5 +1,7 @@
 .projectListItem {
-  margin-top: 20px;
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding: 0.75rem;
 
   &:first-child {
     margin-top: 0;
@@ -14,9 +16,14 @@
     outline: none;
   }
 
+  &__editLink {
+    font-size: 75%;
+    margin-left: 0.5rem;
+  }
+
   &__staffButton {
     margin: 0 1em 0 0;
-    padding: 0.5em 1em;
+    padding: 0.25em 0.8em 0.15em;
   }
 
   &__detailHidden {

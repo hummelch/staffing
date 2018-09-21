@@ -114,7 +114,7 @@ class ProjectListItem extends Component {
             {project.customer} - {project.name}
           </span>
 
-          <Link to={{pathname: '/new-project', state: {project}}}> <span role="img" aria-label="edit project">✏️</span></Link>
+          <Link to={{pathname: '/new-project', state: {project}}} className="projectListItem__editLink"> <span role="img" aria-label="edit project">✏️</span></Link>
         </div>
 
         <div className={`projectListItem__${isDetailVisible ? 'detailVisible' : 'detailHidden'}`}>
