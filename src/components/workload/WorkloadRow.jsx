@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import WorkloadTooltip from './WorkloadTooltip';
 
 
@@ -70,7 +71,10 @@ class WorkloadRow extends Component {
 
     return (
       <tr className="workload__row">
-        <td className="workload__cell workload__cell--name">{user.name}</td>
+        <td className="workload__cell workload__cell--name">
+          {user.name}
+          <Link to={{pathname: '/user', state: {user}}} className="workload__editLink"> <span role="img" aria-label="edit user">✏️</span></Link>
+        </td>
 
         {Object.keys(weeks).map(week => (
           <td onClick={this.handleClick} data-user-id={user.id} data-week={week} key={`${user.id}-${week}`} className={`workload__cell ${this.getClassNameByWorkload(weeks[week].days_left, weeks[week].is_not_available)}`}>
