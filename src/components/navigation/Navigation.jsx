@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import {config} from '../../config';
 import Dashboard from '../dashboard/Dashboard';
 import ProjectForm from '../projects/ProjectForm';
+import UserForm from '../user/UserForm';
 import './navigation.css';
 
 class Navigation extends Component {
