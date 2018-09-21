@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {addProject, addUser, updateProject, updateUser} from '../../store/thunks';
-import {config} from '../../config';
+import {addUser, updateUser} from '../../store/thunks';
+// import {config} from '../../config';
 import store from '../../store/index';
 import './userForm.css';
 import {validateFormElement} from "../../staffing/formHelper";
