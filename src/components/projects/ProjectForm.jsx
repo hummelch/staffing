@@ -38,8 +38,11 @@ class ProjectForm extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = { ...defaultState };
-    if(props.location.state && props.location.state.project) {
-      this.state.data = props.location.state.project;
+    if(props.location.state && props.location.state.projectId) {
+      const projectForUpdate = store.getState().data.projects.find(p => props.location.state.projectId === p.id);
+      if(projectForUpdate) {
+        this.state.data = projectForUpdate;
+      }
     }
   }
 
