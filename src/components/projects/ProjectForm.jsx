@@ -6,6 +6,7 @@ import store from '../../store';
 import PropTypes from 'prop-types';
 import {config} from '../../config';
 import './projectForm.css';
+import {validateFormElement} from "../../staffing/formHelper";
 
 const defaultState = {
   data: {
@@ -62,19 +63,7 @@ class ProjectForm extends Component {
 
   handleChange(event) {
     const inputName = event.target.name;
-    let value = event.target.value;
-
-    switch (event.target.getAttribute('data-parse')) {
-      case 'integer':
-        value = parseInt(value, 10);
-        break;
-
-      case 'float':
-        value = parseFloat(value);
-        break;
-
-      default:
-    }
+    const value = validateFormElement(event.target.value, event.target.getAttribute('data-parse'));
 
     this.setState({
       ...this.state,
