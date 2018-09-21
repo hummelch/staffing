@@ -14,12 +14,14 @@ class Navigation extends Component {
           <ul className="navigation clearfix">
             <li>⏱ <b>Staffing {config.year}</b></li>
             <li><NavLink exact className="navigation__link" activeClassName="navigation__link--active" to="/">Dashboard</NavLink></li>
-            <li><NavLink exact className="navigation__link" activeClassName="navigation__link--active" to="/new-project">New Project</NavLink></li>
+            <li><NavLink exact className="navigation__link" activeClassName="navigation__link--active" to="/project">New Project</NavLink></li>
+            <li><NavLink exact className="navigation__link" activeClassName="navigation__link--active" to="/user">New User</NavLink></li>
           </ul>
 
           <main className="content">
             <Route exact path="/" component={Dashboard} />
-            <Route path="/new-project" component={ProjectForm} />
+            <Route path="/project" component={ProjectForm} />
+            <Route path="/user" component={UserForm} />
           </main>
         </div>
       </Router>
