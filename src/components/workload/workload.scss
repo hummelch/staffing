@@ -42,6 +42,7 @@
 
     &--name {
       text-align: left;
+      cursor: auto;
     }
   }
 
@@ -67,5 +68,10 @@
       border-width: 0 7.5px 10px 7.5px;
       border-color: transparent transparent #ffffff transparent;
     }
+  }
+
+  &__editLink {
+    font-size: 75%;
+    margin-left: 0.5rem;
   }
 }
