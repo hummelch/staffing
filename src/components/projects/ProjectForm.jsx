@@ -4,21 +4,29 @@ import { PROJECT_STATUS, getProjectStatusTranslation } from '../../staffing/proj
 import { addProject, updateProject } from '../../store/thunks';
 import store from '../../store';
 import PropTypes from 'prop-types';
+import {config} from '../../config';
+import './projectForm.css';
 
 const defaultState = {
-  id: null,
-  customer: '',
-  name: '',
-  number: '',
-  status: PROJECT_STATUS.ORDERED,
-  manager: '',
-  developer: '',
-  description: '',
-  estimation_days: null,
-  start_week: getWeekNumber(),
-  end_week: null,
-  closed: false,
-  staffings: []
+  data: {
+    id: '',
+    year: config.year,
+    customer: '',
+    name: '',
+    number: '',
+    status: PROJECT_STATUS.ORDERED,
+    manager: '',
+    developer: '',
+    description: '',
+    estimation_days: '',
+    start_week: getWeekNumber(),
+    end_week: '',
+    closed: false,
+    staffings: []
+  },
+  app: {
+    newProjectWasCreated: false
+  }
 };
 
 class ProjectForm extends Component {
@@ -28,17 +36,27 @@ class ProjectForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
-    this.state = (props.location.state && props.location.state.project) ? props.location.state.project : defaultState;
+    this.state = { ...defaultState };
+    if(props.location.state && props.location.state.project) {
+      this.state.data = props.location.state.project;
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    if (this.state.id) {
-      store.dispatch(updateProject(this.state));
+    if (this.state.data.id) {
+      store.dispatch(updateProject(this.state.data));
       this.props.history.push('/');
     } else {
-      store.dispatch(addProject(this.state));
+      store.dispatch(addProject({...this.state.data }));
+      this.setState({
+        ...defaultState,
+        app: {
+          ...defaultState.app,
+          newProjectWasCreated: true
+        }
+      });
     }
   }
 
@@ -58,18 +76,37 @@ class ProjectForm extends Component {
       default:
     }
 
-    this.setState({ [inputName]: value });
+    this.setState({
+      ...this.state,
+      data: {
+        ...this.state.data,
+        [inputName]: value
+      }
+    });
   }
 
   componentDidUpdate() {
-    if (this.state.end_week && this.state.end_week < this.state.start_week) {
-      this.setState({ end_week: null })
+    if (this.state.data.end_week && this.state.data.end_week < this.state.data.start_week) {
+      this.setState({
+        ...this.state,
+        data: {
+          ...this.state.data,
+          end_week: null
+        }
+      });
     }
   }
 
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+    clearInterval(this.newProjectWasCreatedTimeout);
+  }
+
   render() {
-    const { id, customer, name, estimation_days, start_week, end_week } = this.state;
+    const { id, customer, name, manager, developer, description, number, status, estimation_days, start_week, end_week } = this.state.data;
+    const { newProjectWasCreated } = this.state.app;
     const isSubmitDisabled = !(customer && name && estimation_days && start_week && end_week);
+    let newProjectWasCreatedInfo = '';
 
     const startingWeekOptions = Array.from(Array(52).keys()).map(index => {
       const week = index + 1;
@@ -83,9 +120,25 @@ class ProjectForm extends Component {
       }
     }
 
+    if(newProjectWasCreated) {
+      newProjectWasCreatedInfo = <span className="projectForm__success"><span role="img" aria-label="">👍</span> Project was saved</span>;
+
+      this.newProjectWasCreatedTimeout = setTimeout(() => {
+        if(this.state.app.newProjectWasCreated) {
+          this.setState({
+            ...this.state,
+            app: {
+              ...this.state.app,
+              newProjectWasCreated: false
+            }
+          });
+        }
+      }, 6000);
+    }
+
     return (
-      <form>
-        <input type="hidden" name="id" defaultValue={id} />
+      <form className="projectForm">
+        <input type="hidden" name="id" value={id} />
         <div className="grid-container">
 
           <div className="grid-x grid-padding-x">
@@ -98,7 +151,7 @@ class ProjectForm extends Component {
                 <input
                   name="customer"
                   onChange={this.handleChange}
-                  defaultValue={this.state.customer}
+                  value={customer}
                   type="text"
                   placeholder="Customer name"
                   required
@@ -111,7 +164,7 @@ class ProjectForm extends Component {
                 <input
                   name="name"
                   onChange={this.handleChange}
-                  defaultValue={this.state.name}
+                  value={name}
                   type="text"
                   placeholder="Project name"
                   required
@@ -124,7 +177,7 @@ class ProjectForm extends Component {
                 <input
                   name="number"
                   onChange={this.handleChange}
-                  defaultValue={this.state.number}
+                  value={number}
                   type="text"
                   placeholder="Teambox project number"
                 />
@@ -136,7 +189,7 @@ class ProjectForm extends Component {
               <select
                   name="status"
                   onChange={this.handleChange}
-                  defaultValue={this.state.status}
+                  value={status}
                 >
                   <option value={PROJECT_STATUS.ORDERED}>{getProjectStatusTranslation(PROJECT_STATUS.ORDERED)}</option>
                   <option value={PROJECT_STATUS.HOLD}>{getProjectStatusTranslation(PROJECT_STATUS.HOLD)}</option>
@@ -150,7 +203,7 @@ class ProjectForm extends Component {
                 <input
                   name="manager"
                   onChange={this.handleChange}
-                  defaultValue={this.state.manager}
+                  value={manager}
                   type="text"
                   placeholder="Project Manager name"
                 />
@@ -162,7 +215,7 @@ class ProjectForm extends Component {
                 <input
                   name="developer"
                   onChange={this.handleChange}
-                  defaultValue={this.state.developer}
+                  value={developer}
                   type="text"
                   placeholder="Favored Developer name"
                 />
@@ -174,7 +227,7 @@ class ProjectForm extends Component {
                 <textarea
                   name="description"
                   onChange={this.handleChange}
-                  defaultValue={this.state.description}
+                  value={description}
                   placeholder="Additional informations about the project like Jira/Confluence/VSTS Links..."
                   style={{ height: '10rem' }}
                 ></textarea>
@@ -186,7 +239,7 @@ class ProjectForm extends Component {
                 <input
                   name="estimation_days"
                   onChange={this.handleChange}
-                  defaultValue={this.state.estimation_days}
+                  value={estimation_days}
                   type="number"
                   step="0.25"
                   placeholder="Days"
@@ -201,7 +254,7 @@ class ProjectForm extends Component {
                 <select
                   name="start_week"
                   onChange={this.handleChange}
-                  defaultValue={this.state.start_week}
+                  value={start_week}
                   data-parse="integer"
                   required
                 >
@@ -215,8 +268,8 @@ class ProjectForm extends Component {
                 <select
                   name="end_week"
                   onChange={this.handleChange}
-                  defaultValue={this.state.end_week}
-                  disabled={!this.state.start_week}
+                  value={end_week}
+                  disabled={!start_week}
                   data-parse="integer"
                   required
                 >
@@ -234,6 +287,7 @@ class ProjectForm extends Component {
               className="button"
               value="Submit"
             />
+            {newProjectWasCreatedInfo}
           </div>
 
           <p className="help-text">* Required fields</p>
