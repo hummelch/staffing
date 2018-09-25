@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import WorkloadRow from './WorkloadRow';
 import './workload.css';
+import {getWeekNumber} from "../../staffing/dateHelper";
 
 class WorkloadTable extends Component {
 
@@ -30,8 +31,10 @@ class WorkloadTable extends Component {
 
   render() {
     const thead = [<th key={0}>KW</th>];
+    const currentWeek = getWeekNumber();
+
     for (let x = this.props.from; x <= this.props.to; x++) {
-      thead.push(<th key={x}>{x}</th>);
+      thead.push(<th key={x} class={x === currentWeek ? 'workload--currentWeek' : ''}>{x}</th>);
     }
 
     return (
