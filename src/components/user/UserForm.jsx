@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {addUser, updateUser} from '../../store/thunks';
-// import {config} from '../../config';
 import store from '../../store/index';
 import './userForm.css';
 import {validateFormElement} from "../../staffing/formHelper";
-import UserCustomWeekForm from "./UserCustomWeekForm";
 
 const defaultState = {
   data: {
