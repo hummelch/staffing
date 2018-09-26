@@ -34,7 +34,7 @@ class WorkloadTable extends Component {
     const currentWeek = getWeekNumber();
 
     for (let x = this.props.from; x <= this.props.to; x++) {
-      thead.push(<th key={x} class={x === currentWeek ? 'workload--currentWeek' : ''}>{x}</th>);
+      thead.push(<th key={x} className={x === currentWeek ? 'workload--currentWeek' : ''}>{x}</th>);
     }
 
     return (
