@@ -34,7 +34,7 @@ class WorkloadRow extends Component {
   renderTooltip(id, week) {
     const { tooltip } = this.props;
 
-    if (!tooltip || tooltip.id !== id || tooltip.week !== week) {
+    if (!tooltip || tooltip.id !== id || parseInt(tooltip.week, 10) !== week) {
       return '';
     }
 
@@ -60,7 +60,7 @@ class WorkloadRow extends Component {
         {Object.keys(weeks).map(week => (
           <td onClick={this.handleClick} data-user-id={user.id} data-week={week} key={`${user.id}-${week}`} className={`workload__cell ${this.getClassNameByWorkload(weeks[week].days_left, weeks[week].is_not_available)}`}>
             {weeks[week].days_left}
-            {this.renderTooltip(user.id, week)}
+            {this.renderTooltip(user.id, parseInt(week, 10))}
           </td>
         ))}
       </tr>
