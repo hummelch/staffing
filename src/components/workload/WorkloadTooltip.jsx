@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './workloadTooltip.css';
+import UserCustomWeekForm from "../user/UserCustomWeekForm";
 
 const mapStateToProps = state => {
   return {
@@ -36,6 +37,7 @@ class WorkloadTooltip extends Component {
         <ul className="workloadTooltip__list">
           {staffings.map((staffing, idx) => <li className="workloadTooltip__item" key={idx}>{staffing}</li>)}
         </ul>
+        <UserCustomWeekForm userId={user.id} week={week}/>
       </div>
     );
 
@@ -44,7 +46,7 @@ class WorkloadTooltip extends Component {
 
 WorkloadTooltip.propTypes = {
   id: PropTypes.number,
-  week: PropTypes.string
+  week: PropTypes.number
 };
 
 export default connect(mapStateToProps)(WorkloadTooltip);
