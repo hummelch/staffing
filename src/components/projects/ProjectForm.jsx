@@ -241,7 +241,7 @@ class ProjectForm extends Component {
             </div>
 
             <div className="medium-4 cell">
-              <label>Starting Week (KW) *
+              <label>Starting Week *
                 <select
                   name="startWeek"
                   onChange={this.handleChange}
@@ -255,7 +255,7 @@ class ProjectForm extends Component {
             </div>
 
             <div className="medium-4 cell">
-              <label>Ending Week (KW) *
+              <label>Ending Week *
                 <select
                   name="endWeek"
                   onChange={this.handleChange}

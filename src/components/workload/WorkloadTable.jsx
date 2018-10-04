@@ -30,7 +30,7 @@ class WorkloadTable extends Component {
   }
 
   render() {
-    const thead = [<th key={0}>KW</th>];
+    const thead = [<th key={0}>Week</th>];
     const currentWeek = getWeekNumber();
 
     for (let x = this.props.from; x <= this.props.to; x++) {

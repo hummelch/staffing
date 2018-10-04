@@ -89,7 +89,7 @@ class UserCustomWeekForm extends Component {
 
     const information = (
       <div className="userCustomWeekForm__information">
-        Available: {days} TW
+        Available: {days} days
         <span role="img" aria-label="edit custom days" onClick={this.handleClick}> ✏️</span>
       </div>
     );
@@ -98,7 +98,7 @@ class UserCustomWeekForm extends Component {
       <div className="userCustomWeekForm__form">
         <form onSubmit={this.handleSubmit}>
           <div className="input-group">
-            <span className="input-group-label">TW</span>
+            <span className="input-group-label">Days</span>
             <input value={days.toString()}
                    onClick={this.ignoreClick}
                    onChange={this.handleChange}

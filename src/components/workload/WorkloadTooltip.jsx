@@ -20,7 +20,7 @@ class WorkloadTooltip extends Component {
     this.props.projects.forEach(project => {
       project.staffings.forEach(staffing => {
         if(staffing.userId === id && staffing.week === parseInt(week, 10)) {
-          staffings.push(`${project.name} - ${staffing.days} TW`);
+          staffings.push(`${project.name} - ${staffing.days} days`);
         }
       })
     });
@@ -31,7 +31,7 @@ class WorkloadTooltip extends Component {
 
     return (
       <div className="workloadTooltip">
-        <div className="workloadTooltip__name">{user.name} - KW {week}</div>
+        <div className="workloadTooltip__name">{user.name} - Week {week}</div>
         <UserCustomWeekForm user={user} week={week}/>
         <ul className="workloadTooltip__list">
           {staffings.map((staffing, idx) => <li className="workloadTooltip__item" key={idx}>{staffing}</li>)}

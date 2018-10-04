@@ -63,13 +63,13 @@ class ProjectListItem extends Component {
     };
 
     const staffedDays = this.getStaffedDays(project);
-    let timing = `KW ${project.startWeek}`;
+    let timing = `Week ${project.startWeek}`;
     if (project.startWeek !== project.endWeek) {
       timing += ` - ${project.endWeek}`;
     }
 
     addToList('Timing', timing);
-    addToList('Staffing', `${project.estimationDays} TW (${staffedDays} TW staffed) ${staffedDays > project.estimationDays ? '❗' : ''}`);
+    addToList('Staffing', `${project.estimationDays} days (${staffedDays} days staffed) ${staffedDays > project.estimationDays ? '❗' : ''}`);
     addToList('Project number', `${project.number}`, project.number);
     addToList('Project Manager', `${project.manager}`, project.manager);
     addToList('Favored Developer', `${project.developer}`, project.developer);
@@ -123,7 +123,7 @@ class ProjectListItem extends Component {
               <Tab>Facts</Tab>
               <Tab>Details</Tab>
               <Tab>
-                Staffing ({staffedDays} of {project.estimationDays} TW)
+                Staffing ({staffedDays} of {project.estimationDays} days)
               </Tab>
             </TabList>
 

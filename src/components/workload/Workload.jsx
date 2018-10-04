@@ -84,7 +84,7 @@ class Workload extends Component {
   }
 
   render() {
-    const thead = [<th key={0}>KW</th>];
+    const thead = [<th key={0}>Week</th>];
     for (let x = this.state.from; x <= this.state.to; x++) {
       thead.push(<th key={x}>{x}</th>);
     }
@@ -96,7 +96,7 @@ class Workload extends Component {
           max={52}
           defaultValue={[this.state.from, this.state.to]}
           pushable={true}
-          tipFormatter={value => `KW ${value}`}
+          tipFormatter={value => `Week ${value}`}
           onChange={this.rangeOnChange}
           handleStyle={[Workload.handleStyle, Workload.handleStyle]}
           trackStyle={[Workload.trackStyle, Workload.trackStyle]}

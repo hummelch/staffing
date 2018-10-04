@@ -74,7 +74,7 @@ class ProjectStaffingDetail extends Component {
     const days = parseInt(e.target.getAttribute('data-days'), 10);
     const week = parseInt(e.target.getAttribute('data-week'), 10);
 
-    if (window.confirm(`Really remove ${days} TW in KW ${week} from ${name} in "${this.props.project.name}"?`)) {
+    if (window.confirm(`Really remove ${days} days in week ${week} from ${name} in "${this.props.project.name}"?`)) {
       // this.setState({isClosing: true});
       store.dispatch(removeStaffing(this.props.project.id, id, week, days));
     }
@@ -114,12 +114,12 @@ class ProjectStaffingDetail extends Component {
           <div key={user.id} className="projectStaffingDetail">
             <div onClick={this.handleDetailsToggleClick} data-user-id={user.id} className="projectStaffingDetail__title">
               <span className="projectStaffingDetail__visibilityIndicator">{visible.includes(user.id) ? '-' : '+'}</span>
-              {user.name} - {user.total} TW
+              {user.name} - {user.total} days
             </div>
             <ul className={`projectStaffingDetail__details ${visible.includes(user.id) && `projectStaffingDetail__details--visible`}`}>
               {user.staffings.map((staffing, idx) => (
                 <li key={idx}>
-                  KW {staffing.week} - {staffing.days} TW
+                  Week {staffing.week} - {staffing.days} days
                   <span className="projectStaffingDetail__removeStaffingLink"
                         data-user-id={user.id}
                         data-week={staffing.week}
