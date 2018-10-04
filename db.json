@@ -3,22 +3,22 @@
     {
       "id": 1,
       "name": "Jan",
-      "days_per_week": 3
+      "daysPerWeek": 3
     },
     {
       "id": 2,
       "name": "Jonas",
-      "days_per_week": 4
+      "daysPerWeek": 4
     },
     {
       "id": 3,
       "name": "Alex",
-      "days_per_week": 4
+      "daysPerWeek": 4
     },
     {
       "id": 4,
       "name": "Exo",
-      "days_per_week": 0
+      "daysPerWeek": 0
     }
   ],
   "projects": [
@@ -179,7 +179,7 @@
       "userId": 1,
       "year": 2018,
       "week": 34,
-      "days": 2
+      "days": 2.5
     },
     {
       "id": 2,

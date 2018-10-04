@@ -24,7 +24,7 @@ class UserCustomWeekForm extends Component {
         userId: user.id,
         year: config.year,
         week: week,
-        days: user.days_per_week
+        days: user.daysPerWeek
       };
     }
 

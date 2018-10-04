@@ -8,7 +8,7 @@ const defaultState = {
   data: {
     id: '',
     name: '',
-    days_per_week: 5
+    daysPerWeek: 5
   },
   userCustomDays: [],
   app: {
@@ -56,7 +56,7 @@ class UserForm extends Component {
     const inputName = event.target.name;
     let value = validateFormElement(event.target.value, event.target.getAttribute('data-parse'));
 
-    if (inputName === 'days_per_week' && isNaN(value)) {
+    if (inputName === 'daysPerWeek' && isNaN(value)) {
       value = 0;
     }
 
@@ -74,7 +74,7 @@ class UserForm extends Component {
   }
 
   render() {
-    const {id, name, days_per_week} = this.state.data;
+    const {id, name, daysPerWeek} = this.state.data;
     const {newUserWasCreated} = this.state.app;
     const isSubmitDisabled = !name;
     let newUserWasCreatedInfo = '';
@@ -123,9 +123,9 @@ class UserForm extends Component {
               <div className="medium-4 cell">
                 <label>Days per week (default) *
                   <input
-                    name="days_per_week"
+                    name="daysPerWeek"
                     onChange={this.handleChange}
-                    value={days_per_week}
+                    value={daysPerWeek}
                     type="number"
                     step="0.25"
                     max="7"

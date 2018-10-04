@@ -7,8 +7,8 @@ export const calculateWorkloadForUser = (user, projects, userCustomDays) => {
   // count up all default week days for all 52 weeks per year
   for (let week = 1; week <= 52; week++) {
     updatedUser.calculated_weeks[week] = {
-      days_left: user.days_per_week,
-      is_not_available: user.days_per_week === 0
+      days_left: user.daysPerWeek,
+      is_not_available: user.daysPerWeek === 0
     };
   }
 
