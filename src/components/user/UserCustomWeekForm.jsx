@@ -18,9 +18,6 @@ class UserCustomWeekForm extends Component {
     const globalState = store.getState();
 
     let userCustomDay = globalState.data.userCustomDays.find(c => c.userId === user.id && c.year === config.year && c.week === week);
-
-    console.log(userCustomDay);
-
     if (!userCustomDay) {
       userCustomDay = {
         id: '',
@@ -60,16 +57,8 @@ class UserCustomWeekForm extends Component {
 
     if (this.state.userCustomDay.id) {
       store.dispatch(updateUserCustomDay({...this.state.userCustomDay}));
-      // this.props.history.push('/');
     } else {
       store.dispatch(addUserCustomDay({...this.state.userCustomDay }));
-      // this.setState({
-      //   ...defaultState,
-      //   app: {
-      //     ...defaultState.app,
-      //     newUserWasCreated: true
-      //   }
-      // });
     }
 
     this.setState({
