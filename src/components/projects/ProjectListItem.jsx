@@ -69,7 +69,7 @@ class ProjectListItem extends Component {
     }
 
     addToList('Timing', timing);
-    addToList('Staffing', `${project.estimation_days} TW (${staffedDays} TW staffed) ${staffedDays > project.estimation_days ? '❗' : ''}`);
+    addToList('Staffing', `${project.estimationDays} TW (${staffedDays} TW staffed) ${staffedDays > project.estimationDays ? '❗' : ''}`);
     addToList('Project number', `${project.number}`, project.number);
     addToList('Project Manager', `${project.manager}`, project.manager);
     addToList('Favored Developer', `${project.developer}`, project.developer);
@@ -104,13 +104,13 @@ class ProjectListItem extends Component {
           <button className="projectListItem__toggleDetailButton" onClick={this.toggleDetail} type="button">
             {isDetailVisible ? '-' : '+'}
           </button>
-          {staffedDays >= project.estimation_days ? '' : (
+          {staffedDays >= project.estimationDays ? '' : (
             <a className="projectListItem__staffButton button small small-only-expanded success"
                onClick={this.openDetailsAndShowStaffingTab}>Staff
             </a>
           )}
           <span className="projectListItem__name" onClick={this.toggleDetail}>
-            {staffedDays > project.estimation_days ? '❗' : ''}
+            {staffedDays > project.estimationDays ? '❗' : ''}
             {project.customer} - {project.name}
           </span>
 
@@ -123,7 +123,7 @@ class ProjectListItem extends Component {
               <Tab>Facts</Tab>
               <Tab>Details</Tab>
               <Tab>
-                Staffing ({staffedDays} of {project.estimation_days} TW)
+                Staffing ({staffedDays} of {project.estimationDays} TW)
               </Tab>
             </TabList>
 

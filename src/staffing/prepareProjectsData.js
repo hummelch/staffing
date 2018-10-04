@@ -13,7 +13,7 @@ export const prepareProjectsData = (stateProjects) => {
     } else {
       const staffedDays = project.staffings.reduce((acc, val) => acc + val.days, 0);
 
-      if (staffedDays >= project.estimation_days) {
+      if (staffedDays >= project.estimationDays) {
         result.staffed.push(project)
       } else {
         result.open.push(project)

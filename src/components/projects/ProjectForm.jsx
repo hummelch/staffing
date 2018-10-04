@@ -19,7 +19,7 @@ const defaultState = {
     manager: '',
     developer: '',
     description: '',
-    estimation_days: '',
+    estimationDays: '',
     start_week: getWeekNumber(),
     end_week: '',
     closed: false,
@@ -94,9 +94,9 @@ class ProjectForm extends Component {
   }
 
   render() {
-    const { id, customer, name, manager, developer, description, number, status, estimation_days, start_week, end_week } = this.state.data;
+    const { id, customer, name, manager, developer, description, number, status, estimationDays, start_week, end_week } = this.state.data;
     const { newProjectWasCreated } = this.state.app;
-    const isSubmitDisabled = !(customer && name && estimation_days && start_week && end_week);
+    const isSubmitDisabled = !(customer && name && estimationDays && start_week && end_week);
     let newProjectWasCreatedInfo = '';
 
     const startingWeekOptions = Array.from(Array(52).keys()).map(index => {
@@ -228,9 +228,9 @@ class ProjectForm extends Component {
             <div className="medium-4 cell">
               <label>Estimated working days *
                 <input
-                  name="estimation_days"
+                  name="estimationDays"
                   onChange={this.handleChange}
-                  value={estimation_days}
+                  value={estimationDays}
                   type="number"
                   step="0.25"
                   placeholder="Days"
