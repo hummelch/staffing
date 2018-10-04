@@ -14,7 +14,7 @@ export const calculateWorkloadForUser = (user, projects, userCustomDays) => {
 
   // check custom days
   userCustomDays.forEach(custom => {
-    if(custom.user_id === user.id) {
+    if(custom.userId === user.id) {
       updatedUser.calculated_weeks[custom.week].days_left = custom.days;
       updatedUser.calculated_weeks[custom.week].is_not_available = custom.days === 0;
     }
@@ -32,7 +32,7 @@ export const calculateWorkloadForUser = (user, projects, userCustomDays) => {
 
 const subtractStaffedWorkingDays = (user, project) => {
   for (let staffing of project.staffings) {
-    if (user.id === staffing.user_id) {
+    if (user.id === staffing.userId) {
       user.calculated_weeks[staffing.week].days_left -= staffing.days;
     }
   }

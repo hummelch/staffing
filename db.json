@@ -33,22 +33,22 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimationDays": 4,
-      "start_week": 5,
-      "end_week": 7,
+      "startWeek": 5,
+      "endWeek": 7,
       "closed": false,
       "staffings": [
         {
-          "user_id": 1,
+          "userId": 1,
           "days": 1,
           "week": 32
         },
         {
-          "user_id": 2,
+          "userId": 2,
           "days": 2,
           "week": 33
         },
         {
-          "user_id": 2,
+          "userId": 2,
           "days": 1,
           "week": 34
         }
@@ -65,22 +65,22 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimationDays": 4,
-      "start_week": 5,
-      "end_week": 7,
+      "startWeek": 5,
+      "endWeek": 7,
       "closed": true,
       "staffings": [
         {
-          "user_id": 1,
+          "userId": 1,
           "days": 1,
           "week": 5
         },
         {
-          "user_id": 2,
+          "userId": 2,
           "days": 2,
           "week": 6
         },
         {
-          "user_id": 2,
+          "userId": 2,
           "days": 1,
           "week": 7
         }
@@ -97,8 +97,8 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimationDays": 4,
-      "start_week": 31,
-      "end_week": 37,
+      "startWeek": 31,
+      "endWeek": 37,
       "closed": false,
       "staffings": []
     },
@@ -113,17 +113,17 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimationDays": 4,
-      "start_week": 31,
-      "end_week": 37,
+      "startWeek": 31,
+      "endWeek": 37,
       "closed": false,
       "staffings": [
         {
-          "user_id": 1,
+          "userId": 1,
           "days": 1,
           "week": 35
         },
         {
-          "user_id": 2,
+          "userId": 2,
           "days": 1,
           "week": 37
         }
@@ -140,17 +140,17 @@
       "developer": "Mr. Z",
       "description": "Some additional description",
       "estimationDays": 4,
-      "start_week": 31,
-      "end_week": 37,
+      "startWeek": 31,
+      "endWeek": 37,
       "closed": false,
       "staffings": [
         {
-          "user_id": 1,
+          "userId": 1,
           "days": 3,
           "week": 35
         },
         {
-          "user_id": 2,
+          "userId": 2,
           "days": 3,
           "week": 37
         }
@@ -166,8 +166,8 @@
       "developer": "",
       "description": "",
       "estimationDays": 23,
-      "start_week": 34,
-      "end_week": 36,
+      "startWeek": 34,
+      "endWeek": 36,
       "closed": false,
       "staffings": [],
       "id": 6

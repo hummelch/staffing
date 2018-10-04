@@ -73,7 +73,7 @@ class StaffingForm extends Component {
 
     for (let week = kwFrom; week <= kwTo; week++) {
       staffings.push({
-        user_id: user,
+        userId: user,
         days: tw,
         week
       });
@@ -98,19 +98,19 @@ class StaffingForm extends Component {
     const userOptionMarkup = [<option value="0" key="0">Select Dev</option>, ...userOptions];
 
     const kwFromOptions = [<option value="0" key="0">KW Start</option>];
-    for (let from = project.start_week; from <= project.end_week; from++) {
+    for (let from = project.startWeek; from <= project.endWeek; from++) {
       kwFromOptions.push(<option value={from} key={from}>{from}</option>)
     }
 
     const kwToOptions = [<option value="0" key="0">KW End</option>];
     if (kwFrom) {
-      for (let to = kwFrom; to <= project.end_week; to++) {
+      for (let to = kwFrom; to <= project.endWeek; to++) {
         kwToOptions.push(<option value={to} key={to}>{to}</option>)
       }
     }
 
     const conditionalWorkloadTable = user ? (
-      <WorkloadTable from={project.start_week} to={project.end_week} users={users.filter(u => user === u.id)}/>
+      <WorkloadTable from={project.startWeek} to={project.endWeek} users={users.filter(u => user === u.id)}/>
     ) : '';
 
     return (

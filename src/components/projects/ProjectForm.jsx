@@ -20,8 +20,8 @@ const defaultState = {
     developer: '',
     description: '',
     estimationDays: '',
-    start_week: getWeekNumber(),
-    end_week: '',
+    startWeek: getWeekNumber(),
+    endWeek: '',
     closed: false,
     staffings: []
   },
@@ -78,12 +78,12 @@ class ProjectForm extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.data.end_week && this.state.data.end_week < this.state.data.start_week) {
+    if (this.state.data.endWeek && this.state.data.endWeek < this.state.data.startWeek) {
       this.setState({
         ...this.state,
         data: {
           ...this.state.data,
-          end_week: null
+          endWeek: null
         }
       });
     }
@@ -94,9 +94,9 @@ class ProjectForm extends Component {
   }
 
   render() {
-    const { id, customer, name, manager, developer, description, number, status, estimationDays, start_week, end_week } = this.state.data;
+    const { id, customer, name, manager, developer, description, number, status, estimationDays, startWeek, endWeek } = this.state.data;
     const { newProjectWasCreated } = this.state.app;
-    const isSubmitDisabled = !(customer && name && estimationDays && start_week && end_week);
+    const isSubmitDisabled = !(customer && name && estimationDays && startWeek && endWeek);
     let newProjectWasCreatedInfo = '';
 
     const startingWeekOptions = Array.from(Array(52).keys()).map(index => {
@@ -105,8 +105,8 @@ class ProjectForm extends Component {
     });
 
     const endingWeekOptions = [<option key="0" value="">Select End Week</option>];
-    if (start_week) {
-      for (let week = start_week; week <= 52; week++) {
+    if (startWeek) {
+      for (let week = startWeek; week <= 52; week++) {
         endingWeekOptions.push(<option key={week} value={week}>{week}</option>)
       }
     }
@@ -243,9 +243,9 @@ class ProjectForm extends Component {
             <div className="medium-4 cell">
               <label>Starting Week (KW) *
                 <select
-                  name="start_week"
+                  name="startWeek"
                   onChange={this.handleChange}
-                  value={start_week}
+                  value={startWeek}
                   data-parse="integer"
                   required
                 >
@@ -257,10 +257,10 @@ class ProjectForm extends Component {
             <div className="medium-4 cell">
               <label>Ending Week (KW) *
                 <select
-                  name="end_week"
+                  name="endWeek"
                   onChange={this.handleChange}
-                  value={end_week}
-                  disabled={!start_week}
+                  value={endWeek}
+                  disabled={!startWeek}
                   data-parse="integer"
                   required
                 >

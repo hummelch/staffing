@@ -19,7 +19,7 @@ class WorkloadTooltip extends Component {
 
     this.props.projects.forEach(project => {
       project.staffings.forEach(staffing => {
-        if(staffing.user_id === id && staffing.week === parseInt(week, 10)) {
+        if(staffing.userId === id && staffing.week === parseInt(week, 10)) {
           staffings.push(`${project.name} - ${staffing.days} TW`);
         }
       })

@@ -89,7 +89,7 @@ export function removeStaffing(projectId, userId, week, days) {
     const state = store.getState();
     const { projects } = state.data;
     const project = Object.assign({}, projects.find((item) => item.id === projectId));
-    project.staffings.splice(project.staffings.findIndex(elem => (elem.user_id === userId && elem.week === week && elem.days === days)), 1);
+    project.staffings.splice(project.staffings.findIndex(elem => (elem.userId === userId && elem.week === week && elem.days === days)), 1);
 
     return axios({
       method: 'PUT',

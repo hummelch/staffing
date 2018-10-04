@@ -27,12 +27,12 @@ class ProjectStaffingDetail extends Component {
     const data = [];
 
     this.props.staffings.forEach(staffing => {
-      const findByUserId = element => element.id === staffing.user_id;
+      const findByUserId = element => element.id === staffing.userId;
 
       if(!data.find(findByUserId)) {
         data.push({
-          id: staffing.user_id,
-          name: this.findNameByUserid(staffing.user_id),
+          id: staffing.userId,
+          name: this.findNameByUserid(staffing.userId),
           total: 0,
           staffings: []
         });

@@ -63,9 +63,9 @@ class ProjectListItem extends Component {
     };
 
     const staffedDays = this.getStaffedDays(project);
-    let timing = `KW ${project.start_week}`;
-    if (project.start_week !== project.end_week) {
-      timing += ` - ${project.end_week}`;
+    let timing = `KW ${project.startWeek}`;
+    if (project.startWeek !== project.endWeek) {
+      timing += ` - ${project.endWeek}`;
     }
 
     addToList('Timing', timing);
