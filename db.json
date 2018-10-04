@@ -175,22 +175,32 @@
   ],
   "userCustomDays": [
     {
+      "id": 1,
       "userId": 1,
       "year": 2018,
       "week": 34,
-      "days": 1
+      "days": 2
     },
     {
+      "id": 2,
       "userId": 2,
       "year": 2018,
       "week": 37,
       "days": 0
     },
     {
+      "id": 3,
       "userId": 2,
       "year": 2019,
       "week": 37,
       "days": 0
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "year": 2018,
+      "week": 36,
+      "days": 5
     }
   ]
 }
