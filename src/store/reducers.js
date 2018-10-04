@@ -1,16 +1,23 @@
 import {
-  LOAD_DB, LOAD_DB_ERROR, LOAD_DB_SUCCESS, LOAD_DB_BEGIN,
+  LOAD_DB,
+  LOAD_DB_ERROR,
+  LOAD_DB_SUCCESS,
+  LOAD_DB_BEGIN,
   CLOSE_PROJECT_SUCCESS,
   ADD_STAFFING_SUCCESS,
   ADD_PROJECT_SUCCESS,
-  UPDATE_PROJECT_SUCCESS, ADD_USER_SUCCESS, UPDATE_USER_SUCCESS
+  UPDATE_PROJECT_SUCCESS,
+  ADD_USER_SUCCESS,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_CUSTOM_DAY_SUCCESS,
+  ADD_USER_CUSTOM_DAY_SUCCESS
 } from './types';
 
 const initialState = {
   isLoading: true,
   errorMessage: '',
   data: {}
-}
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -93,6 +100,27 @@ const rootReducer = (state = initialState, action) => {
         data: {
           ...state.data,
           users: state.data.users.map(user => (user.id === action.payload.user.id) ? action.payload.user : user)
+        }
+      };
+
+    case ADD_USER_CUSTOM_DAY_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          userCustomDays: [
+            ...state.data.userCustomDays,
+            action.payload.userCustomDay
+          ]
+        }
+      };
+
+    case UPDATE_USER_CUSTOM_DAY_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          userCustomDays: state.data.userCustomDays.map(day => (day.id === action.payload.userCustomDay.id) ? action.payload.userCustomDay : day)
         }
       };
 

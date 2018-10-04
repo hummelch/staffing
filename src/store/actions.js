@@ -1,8 +1,15 @@
 import {
-  LOAD_DB_BEGIN, LOAD_DB_ERROR, LOAD_DB_SUCCESS,
-  CLOSE_PROJECT_SUCCESS, ADD_STAFFING_SUCCESS,
+  LOAD_DB_BEGIN,
+  LOAD_DB_ERROR,
+  LOAD_DB_SUCCESS,
+  CLOSE_PROJECT_SUCCESS,
+  ADD_STAFFING_SUCCESS,
   ADD_PROJECT_SUCCESS,
-  UPDATE_PROJECT_SUCCESS, UPDATE_USER_SUCCESS, ADD_USER_SUCCESS
+  UPDATE_PROJECT_SUCCESS,
+  UPDATE_USER_SUCCESS,
+  ADD_USER_SUCCESS,
+  ADD_USER_CUSTOM_DAY_SUCCESS,
+  UPDATE_USER_CUSTOM_DAY_SUCCESS
 } from './types';
 
 export const loadDbBegin = () => ({
@@ -47,5 +54,15 @@ export const addUserSuccess = user => ({
 export const updateUserSuccess = user => ({
   type: UPDATE_USER_SUCCESS,
   payload: { user }
+});
+
+export const addUserCustomDaySuccess = userCustomDay => ({
+  type: ADD_USER_CUSTOM_DAY_SUCCESS,
+  payload: { userCustomDay }
+});
+
+export const updateUserCustomDaySuccess = userCustomDay => ({
+  type: UPDATE_USER_CUSTOM_DAY_SUCCESS,
+  payload: { userCustomDay }
 });
 

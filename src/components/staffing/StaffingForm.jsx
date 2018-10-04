@@ -73,7 +73,7 @@ class StaffingForm extends Component {
 
     for (let week = kwFrom; week <= kwTo; week++) {
       staffings.push({
-        user_id: user,
+        userId: user,
         days: tw,
         week
       });
@@ -97,20 +97,20 @@ class StaffingForm extends Component {
     const userOptions = this.props.users.map(user => <option value={user.id} key={user.id}>{user.name}</option>);
     const userOptionMarkup = [<option value="0" key="0">Select Dev</option>, ...userOptions];
 
-    const kwFromOptions = [<option value="0" key="0">KW Start</option>];
-    for (let from = project.start_week; from <= project.end_week; from++) {
+    const kwFromOptions = [<option value="0" key="0">Start week</option>];
+    for (let from = project.startWeek; from <= project.endWeek; from++) {
       kwFromOptions.push(<option value={from} key={from}>{from}</option>)
     }
 
-    const kwToOptions = [<option value="0" key="0">KW End</option>];
+    const kwToOptions = [<option value="0" key="0">End week</option>];
     if (kwFrom) {
-      for (let to = kwFrom; to <= project.end_week; to++) {
+      for (let to = kwFrom; to <= project.endWeek; to++) {
         kwToOptions.push(<option value={to} key={to}>{to}</option>)
       }
     }
 
     const conditionalWorkloadTable = user ? (
-      <WorkloadTable from={project.start_week} to={project.end_week} users={users.filter(u => user === u.id)}/>
+      <WorkloadTable from={project.startWeek} to={project.endWeek} users={users.filter(u => user === u.id)}/>
     ) : '';
 
     return (
@@ -125,7 +125,7 @@ class StaffingForm extends Component {
               </select>
             </div>
             <div className="medium-2 large-5 cell">
-              <input value={tw} onChange={this.handleChangeTw} placeholder="TW per Week" type="number" min="0.25"
+              <input value={tw} onChange={this.handleChangeTw} placeholder="Days per Week" type="number" min="0.25"
                      max="7"
                      step="0.25"/>
             </div>
