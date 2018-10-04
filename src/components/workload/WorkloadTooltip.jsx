@@ -25,8 +25,6 @@ class WorkloadTooltip extends Component {
       })
     });
 
-    // TODO Add default days per week OR special days per week
-
     if(!staffings.length) {
       staffings.push('Nothing staffed yet');
     }
@@ -34,10 +32,10 @@ class WorkloadTooltip extends Component {
     return (
       <div className="workloadTooltip">
         <div className="workloadTooltip__name">{user.name} - KW {week}</div>
+        <UserCustomWeekForm user={user} week={week}/>
         <ul className="workloadTooltip__list">
           {staffings.map((staffing, idx) => <li className="workloadTooltip__item" key={idx}>{staffing}</li>)}
         </ul>
-        <UserCustomWeekForm userId={user.id} week={week}/>
       </div>
     );
 
