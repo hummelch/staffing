@@ -6,7 +6,7 @@ import {
   addStaffingSuccess,
   addProjectSuccess,
   updateProjectSuccess,
-  addUserSuccess, updateUserSuccess
+  addUserSuccess, updateUserSuccess, addUserCustomDaySuccess, updateUserCustomDaySuccess
 } from './actions';
 import axios from 'axios';
 import store from './index';
@@ -180,6 +180,46 @@ export function updateUser(user) {
     })
       .then((response) => {
         dispatch(updateUserSuccess(response.data));
+      })
+      .catch((error) => {
+        console.error('error updating user', error);
+        // dispatch(loadDbError(error))
+      });
+  };
+}
+
+export function addUserCustomDay(userCustomDay) {
+  return dispatch => {
+    // dispatch(loadDbBegin());
+
+    return axios({
+      method: 'POST',
+      url: `${config.databaseHost}/userCustomDays`,
+      headers: { 'Content-Type': 'application/json' },
+      data: userCustomDay
+    })
+      .then((response) => {
+        dispatch(addUserCustomDaySuccess(response.data));
+      })
+      .catch((error) => {
+        console.error('error adding user custom day', error);
+        // dispatch(loadDbError(error))
+      });
+  };
+}
+
+export function updateUserCustomDay(userCustomDay) {
+  return dispatch => {
+    // dispatch(loadDbBegin());
+
+    return axios({
+      method: 'PUT',
+      url: `${config.databaseHost}/userCustomDays/${userCustomDay.id}`,
+      headers: { 'Content-Type': 'application/json' },
+      data: userCustomDay
+    })
+      .then((response) => {
+        dispatch(updateUserCustomDaySuccess(response.data));
       })
       .catch((error) => {
         console.error('error updating user', error);
