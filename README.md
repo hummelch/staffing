@@ -10,3 +10,9 @@ This is a React Training Repo. It contains a React APP featuring Router, Redux, 
 
 Run `yarn start` - that starts react-scripts, scss watcher and the json-server
 
+## Production
+
+- Update `src/config.js` with correct database host and desired year
+- Run `yarn build` to create an optimized production build
+- Copy created `build` folder to the server
+- Run `yarn json-server` on the server to start JSON Server
