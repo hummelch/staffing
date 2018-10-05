@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Navigation from './components/navigation/Navigation';
 import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 import HostForm from './components/host/HostForm';
+import localPackage from '../package.json';
 
 const mapStateToProps = state => {
   return {
@@ -14,18 +15,17 @@ const mapStateToProps = state => {
 
 class App extends Component {
   render() {
-    if (this.props.isLoading) {
-      return (
-        <div>
-          {this.props.errorMessage ? <HostForm /> : ''}
-          <LoadingSpinner/>
-        </div>
-      );
-    }
-
     return (
-      <div className="App">
-        <Navigation/>
+      <div className="app">
+        {this.props.isLoading ? (
+          <div>
+            {this.props.errorMessage ? <HostForm /> : ''}
+            <LoadingSpinner/>
+          </div>
+        ) : <Navigation/>}
+        <footer>
+          Staffing App {localPackage.version}
+        </footer>
       </div>
     );
   }
