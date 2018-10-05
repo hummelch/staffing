@@ -1,46 +1,51 @@
 .loadingSpinner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
 
-    &__spinner {
-        animation: rotator 1.4s linear infinite;
-    }
+  &__spinner {
+    animation: rotator 1.4s linear infinite;
+  }
 
-    &__path {
-        stroke-dasharray: 187;
-        stroke-dashoffset: 0;
-        transform-origin: center;
-        animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-    }
+  &__path {
+    stroke-dasharray: 187;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+  }
+
+  &__information {
+    margin-top: 2rem;
+  }
 }
 
 @keyframes rotator {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(270deg);
-    }
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(270deg);
+  }
 }
 
 @keyframes colors {
-    0% {
-        stroke: #1779ba;
-    }
-    25% {
-        stroke: #cc4b37;
-    }
-    50% {
-        stroke: #ffae00;
-    }
-    75% {
-        stroke: #3adb76;
-    }
-    100% {
-        stroke: #1779ba;
-    }
+  0% {
+      stroke: #1779ba;
+  }
+  25% {
+      stroke: #cc4b37;
+  }
+  50% {
+      stroke: #ffae00;
+  }
+  75% {
+      stroke: #3adb76;
+  }
+  100% {
+      stroke: #1779ba;
+  }
 }
 
 @keyframes dash {
