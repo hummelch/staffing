@@ -30,7 +30,7 @@ class HostForm extends Component {
         <div className="hostForm__error">{this.props.errorMessage}</div>
         <div className="input-group">
           <span className="input-group-label">DB Host</span>
-          <input className="input-group-field" type="text" defaultValue={config.databaseHost}/>
+          <input className="input-group-field" type="text" placeholder="Set full host to DB here" defaultValue={config.databaseHost}/>
           <div className="input-group-button">
             <input type="submit" className="button" value="Submit"/>
           </div>
