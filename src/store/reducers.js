@@ -44,7 +44,7 @@ const rootReducer = (state = initialState, action) => {
       if (error.response) {
         errorMessage = `Staffing DB Fetch: ${error.response.status} ${error.response.statusText}`;
       } else {
-        errorMessage = `Something went horribly wrong :( - ${error}`;
+        errorMessage = error.toString();
       }
 
       return Object.assign({}, state, {
