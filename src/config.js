@@ -1,4 +1,4 @@
 export const config = {
-  databaseHost: 'http://localhost:5000',
+  databaseHost: window.localStorage.getItem('databaseHost') || '',
   year: new Date().getFullYear()
 };
