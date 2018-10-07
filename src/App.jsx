@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import Navigation from './components/navigation/Navigation';
 import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
-import HostForm from './components/host/HostForm';
+import ConfigForm from './components/host/ConfigForm';
 import localPackage from '../package.json';
 
 const mapStateToProps = state => {
@@ -19,7 +19,7 @@ class App extends Component {
       <div className="app">
         {this.props.isLoading ? (
           <div>
-            {this.props.errorMessage ? <HostForm /> : ''}
+            {this.props.errorMessage ? <ConfigForm /> : ''}
             <LoadingSpinner/>
           </div>
         ) : <Navigation/>}
