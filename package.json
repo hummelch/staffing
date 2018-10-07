@@ -1,6 +1,6 @@
 {
   "name": "staffing",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://janrembold.github.io/staffing/",
   "private": true,
   "dependencies": {
