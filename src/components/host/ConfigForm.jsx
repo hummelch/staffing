@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import './hostForm.css';
+import './configForm.css';
 import {config} from '../../config';
 
 const mapStateToProps = state => {
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
   };
 };
 
-class HostForm extends Component {
+class ConfigForm extends Component {
 
   constructor(props) {
     super(props);
@@ -32,10 +32,10 @@ class HostForm extends Component {
     }
 
     return (
-      <form className="hostForm" onSubmit={this.handleSubmit}>
+      <form className="configForm" onSubmit={this.handleSubmit}>
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
-            <div className="cell hostForm__error">{this.props.errorMessage}</div>
+            <div className="cell configForm__error">{this.props.errorMessage}</div>
 
             <div className="cell large-8">
               <label>DB Host URL
@@ -61,4 +61,4 @@ class HostForm extends Component {
   }
 }
 
-export default connect(mapStateToProps)(HostForm);
+export default connect(mapStateToProps)(ConfigForm);

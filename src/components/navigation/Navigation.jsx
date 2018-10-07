@@ -5,7 +5,7 @@ import {config} from '../../config';
 import Dashboard from '../dashboard/Dashboard';
 import ProjectForm from '../projects/ProjectForm';
 import UserForm from '../user/UserForm';
-import HostForm from '../host/HostForm';
+import HostForm from '../host/ConfigForm';
 
 import './navigation.css';
 
