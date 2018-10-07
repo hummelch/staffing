@@ -21,17 +21,38 @@ class HostForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     window.localStorage.setItem('databaseHost', e.target[0].value);
+    window.localStorage.setItem('year', e.target[1].value);
     window.location.reload();
   }
 
   render() {
+    const yearOptions = [];
+    for (let y = 2018; y <= 2025; y++) {
+      yearOptions.push(<option key={y} value={y}>{y}</option>);
+    }
+
     return (
       <form className="hostForm" onSubmit={this.handleSubmit}>
-        <div className="hostForm__error">{this.props.errorMessage}</div>
-        <div className="input-group">
-          <span className="input-group-label">DB Host</span>
-          <input className="input-group-field" type="text" placeholder="Set full host to DB here" defaultValue={config.databaseHost}/>
-          <div className="input-group-button">
+        <div className="grid-container">
+          <div className="grid-x grid-padding-x">
+            <div className="cell hostForm__error">{this.props.errorMessage}</div>
+
+            <div className="cell large-8">
+              <label>DB Host URL
+                <input type="text" placeholder="Set full host to DB here" defaultValue={config.databaseHost}/>
+              </label>
+            </div>
+
+            <div className="cell large-4">
+              <label>Year
+                <select defaultValue={config.year}>
+                  {yearOptions}
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div className="cell">
             <input type="submit" className="button" value="Submit"/>
           </div>
         </div>
