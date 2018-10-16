@@ -1,7 +1,6 @@
 {
   "name": "staffing",
-  "version": "0.2.2",
-  "homepage": "https://janrembold.github.io/staffing/",
+  "version": "0.2.3",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
