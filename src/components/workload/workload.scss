@@ -47,6 +47,10 @@
     &--name {
       text-align: left;
       cursor: auto;
+
+      &:hover {
+        background-color: #dddddd;
+      }
     }
   }
 
@@ -75,6 +79,9 @@
   }
 
   &__editLink {
+    float: right;
+    position: relative;
+    top: 5px;
     font-size: 75%;
     margin-left: 0.5rem;
   }
