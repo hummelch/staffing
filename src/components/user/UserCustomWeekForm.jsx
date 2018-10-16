@@ -89,7 +89,7 @@ class UserCustomWeekForm extends Component {
 
     const information = (
       <div className="userCustomWeekForm__information">
-        Available: {days} days
+        Availability: {days} days
         <span role="img" aria-label="edit custom days" onClick={this.handleClick}> ✏️</span>
       </div>
     );
