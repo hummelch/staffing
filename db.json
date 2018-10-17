@@ -10,19 +10,19 @@
       "id": 2,
       "name": "Jonas",
       "daysPerWeek": 4,
-      "team": "Team1"
+      "team": "Team2"
     },
     {
       "id": 3,
       "name": "Alex",
       "daysPerWeek": 4,
-      "team": "Team1"
+      "team": "Team2"
     },
     {
       "id": 4,
       "name": "Exo",
       "daysPerWeek": 0,
-      "team": "Team2"
+      "team": ""
     }
   ],
   "projects": [
