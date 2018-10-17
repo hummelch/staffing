@@ -3,22 +3,26 @@
     {
       "id": 1,
       "name": "Jan",
-      "daysPerWeek": 3
+      "daysPerWeek": 3,
+      "team": "Team1"
     },
     {
       "id": 2,
       "name": "Jonas",
-      "daysPerWeek": 4
+      "daysPerWeek": 4,
+      "team": "Team2"
     },
     {
       "id": 3,
       "name": "Alex",
-      "daysPerWeek": 4
+      "daysPerWeek": 4,
+      "team": "Team2"
     },
     {
       "id": 4,
       "name": "Exo",
-      "daysPerWeek": 0
+      "daysPerWeek": 0,
+      "team": ""
     }
   ],
   "projects": [

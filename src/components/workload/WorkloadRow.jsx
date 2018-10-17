@@ -53,7 +53,7 @@ class WorkloadRow extends Component {
     return (
       <tr className="workload__row">
         <td className="workload__cell workload__cell--name">
-          {user.name}
+          {user.name} ({user.team ? user.team : 'No team'})
           <Link to={{pathname: '/user', state: {userId: user.id}}} className="workload__editLink"> <span role="img" aria-label="edit user">✏️</span></Link>
         </td>
 

@@ -89,6 +89,8 @@ class Workload extends Component {
       thead.push(<th key={x}>{x}</th>);
     }
 
+    const users = this.props.users.filter(user => !this.props.team || this.props.team === user.team);
+
     return (
       <div>
         <Range
@@ -101,7 +103,7 @@ class Workload extends Component {
           handleStyle={[Workload.handleStyle, Workload.handleStyle]}
           trackStyle={[Workload.trackStyle, Workload.trackStyle]}
         />
-        <WorkloadTable from={this.state.from} to={this.state.to} users={this.props.users}/>
+        <WorkloadTable from={this.state.from} to={this.state.to} users={users}/>
       </div>
     );
   }
@@ -110,7 +112,8 @@ class Workload extends Component {
 Workload.propTypes = {
   from: PropTypes.number,
   to: PropTypes.number,
-  users: PropTypes.array
+  users: PropTypes.array,
+  team: PropTypes.string
 };
 
 export default connect(mapStateToProps)(Workload);
