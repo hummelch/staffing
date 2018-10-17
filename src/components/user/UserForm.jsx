@@ -8,7 +8,8 @@ const defaultState = {
   data: {
     id: '',
     name: '',
-    daysPerWeek: 5
+    daysPerWeek: 5,
+    team: ''
   },
   userCustomDays: [],
   app: {
@@ -74,7 +75,7 @@ class UserForm extends Component {
   }
 
   render() {
-    const {id, name, daysPerWeek} = this.state.data;
+    const {id, name, daysPerWeek, team} = this.state.data;
     const {newUserWasCreated} = this.state.app;
     const isSubmitDisabled = !name;
     let newUserWasCreatedInfo = '';
@@ -120,7 +121,7 @@ class UserForm extends Component {
                 </label>
               </div>
 
-              <div className="medium-4 cell">
+              <div className="medium-2 cell">
                 <label>Days per week (default) *
                   <input
                     name="daysPerWeek"
@@ -132,6 +133,18 @@ class UserForm extends Component {
                     placeholder="Days per week"
                     data-parse="float"
                     required
+                  />
+                </label>
+              </div>
+
+              <div className="medium-4 cell">
+                <label>Team
+                  <input
+                    name="team"
+                    onChange={this.handleChange}
+                    value={team}
+                    type="text"
+                    placeholder="Team"
                   />
                 </label>
               </div>
