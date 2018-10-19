@@ -21,7 +21,7 @@ class ConfigForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    window.localStorage.setItem('databaseHost', e.target[0].value);
+    window.localStorage.setItem('databaseHost', e.target[0].value.replace(/\/$/, ""));
     window.localStorage.setItem('databaseToken', e.target[1].value);
     window.localStorage.setItem('year', e.target[2].value);
 
@@ -49,7 +49,7 @@ class ConfigForm extends Component {
             </div>
 
             <div className="cell large-3">
-              <label>Year
+              <label>Token
                 <input type="text" placeholder="Set security token" defaultValue={config.databaseToken}/>
               </label>
             </div>
