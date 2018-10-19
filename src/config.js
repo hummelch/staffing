@@ -1,5 +1,5 @@
 export const config = {
   databaseHost: window.localStorage.getItem('databaseHost') || '',
-  databaseToken: '',
+  databaseToken: window.localStorage.getItem('databaseToken') || '',
   year: window.localStorage.getItem('year') || new Date().getFullYear()
 };
